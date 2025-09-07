@@ -54,7 +54,7 @@ const certifications = [
 const Hero = () => {
   return (
     <div className="font-Inter min-h-screen lg:h-[95vh] flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 pb-20 gap-8 sm:gap-16 sm:pt-20 bg-gradient-to-b from-[#1679CACF] to-[#0F69B3F2] relative">
-      <main className="flex flex-col gap-6 sm:gap-8 items-center w-full max-w-7xl mx-auto">
+      <div className="flex flex-col gap-6 sm:gap-8 items-center w-full max-w-7xl mx-auto">
         {/* Content Container */}
         <div className="relative z-10 w-full px-4 sm:px-6">
           {/* Header Certification Badge */}
@@ -70,7 +70,7 @@ const Hero = () => {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
             {/* Left Content */}
             <div className="space-y-6 sm:space-y-8 text-center lg:text-left">
-              {/* Main Heading */}
+              {/* div Heading */}
               <div className="space-y-3 sm:space-y-4 font-Montserrat">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
                   We Commit.
@@ -224,7 +224,7 @@ const Hero = () => {
             </div>
           </div>
         </div>
-      </main>
+      </div>
 
       {/* Bottom Certification Bar */}
       <div className="flex items-center justify-center gap-2 sm:gap-4 absolute bottom-0 py-2 sm:py-3 shadow-2xl bg-white w-full overflow-x-auto">

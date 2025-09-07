@@ -37,7 +37,7 @@ const AboutHero = () => {
         </p>
       </header>
 
-      <main className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-8 my-8 sm:my-14">
           {/* Left section */}
           <div className="w-full lg:w-1/2 space-y-4 sm:space-y-6">
@@ -79,7 +79,7 @@ const AboutHero = () => {
             </div>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 };

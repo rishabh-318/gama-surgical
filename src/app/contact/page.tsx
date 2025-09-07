@@ -43,7 +43,7 @@ export default function ContactMe() {
   return (
     <div className="min-h-screen bg-background">
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-12 text-[#22282A]">
+      <div className="container mx-auto px-4 py-12 text-[#22282A]">
         {/* Page Header */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-[#22282A] mb-4">Contact Us</h1>
@@ -210,7 +210,7 @@ export default function ContactMe() {
             </div>
           </div>
         </div>
-      </main>
+      </div>
 
       {/* Footer */}
       <footer className="bg-muted mt-16">

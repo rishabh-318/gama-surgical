@@ -203,7 +203,7 @@ export default function Products() {
           quality standards
         </p>
       </div>
-      {/* Main Content */}
+      {/* div Content */}
       <div className="container mx-auto px-10 py-8">
         <div className="flex flex-col lg:flex-row gap-8 ">
           {/* Sidebar Filters */}
@@ -287,7 +287,7 @@ export default function Products() {
           </aside>
 
           {/* Product Grid */}
-          <main className="flex-1">
+          <div className="flex-1">
             <div className="flex justify-between items-center mb-6">
               <div className="flex items-center justify-between w-full space-x-4">
                 <span className="text-[1rem] text-gray-600">
@@ -369,7 +369,7 @@ export default function Products() {
                 </Card>
               ))}
             </div>
-          </main>
+          </div>
         </div>
       </div>
     </div>
