@@ -1,21 +1,11 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import {
-  Search,
-  ShoppingCart,
-  User,
-  Menu,
-  Star,
-  Filter,
-  FileText,
-  Shield,
-} from "lucide-react";
+import { Search, Filter, FileText, Shield } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/Checkbox";
-import { Slider } from "@/components/ui/slider";
 import Image from "next/image";
 
 const products = [
@@ -164,7 +154,7 @@ export default function Products() {
 
   // Filter and sort products
   const filteredProducts = useMemo(() => {
-    let filtered = products.filter((product) => {
+    const filtered = products.filter((product) => {
       // Category filter
       const categoryMatch =
         selectedCategory === "All Products" ||
@@ -202,7 +192,7 @@ export default function Products() {
     // });
 
     return filtered;
-  }, [selectedCategory, selectedSterility, sortBy, searchQuery]);
+  }, [selectedCategory, selectedSterility, searchQuery]);
 
   return (
     <div className="min-h-screen bg-gray-50">

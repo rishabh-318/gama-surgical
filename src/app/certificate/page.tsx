@@ -1,4 +1,3 @@
-import TargetIcon from "@/components/CustomIcons/TargetIcon";
 import Button from "@/components/ui/Button";
 import {
   Award,
@@ -95,9 +94,9 @@ const Certificate = () => {
             Central Drugs Standard Control Organization
           </p>
           <p className="text-[#6A767C] text-sm">
-            Approval from India's national regulatory body for pharmaceuticals
-            and medical devices, ensuring compliance with all Indian medical
-            device regulations.
+            Approval from India&apos;s national regulatory body for
+            pharmaceuticals and medical devices, ensuring compliance with all
+            Indian medical device regulations.
           </p>
         </div>
         <div className="bg-white rounded-xl p-8 w-[31.5rem] h-70 flex flex-col gap-2 border border-[#E8ECEE] shadow-[#0000000D]">

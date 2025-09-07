@@ -1,5 +1,4 @@
-import React, { ReactNode } from "react";
-import BadgeIcon from "../CustomIcons/BadgeIcon";
+import React from "react";
 import {
   Award,
   Building,
@@ -12,44 +11,45 @@ import Image from "next/image";
 import Button from "../ui/Button";
 
 interface CardProps {
-  icon: React.ElementType; // ✅ Accepts any React component
+  icon: React.ElementType;
   code: string;
   about: string;
 }
 
 const Card = ({ icon: Icon, code, about }: CardProps) => {
   return (
-    <div className="w-54 h-42 aspect-square flex flex-col gap-2 justify-center items-center border border-[#DAE0E7] shadow-sm rounded-lg">
-      <div className="rounded-full w-16 h-16 bg-[#DBECFA] flex items-center justify-center">
-        <Icon
-          textcolor="#FE5E0E"
-          bgcolr="transparent"
-          className="w-10 h-10 p-1 text-[#FE5E0E] "
-        />
+    <div className="w-[90%] md:p-auto md:w-full max-w-54 h-auto aspect-square flex flex-col gap-2 justify-center items-center border border-[#DAE0E7] shadow-sm rounded-lg p">
+      <div className="rounded-full w-12 h-12 sm:w-16 sm:h-16 bg-[#DBECFA] flex items-center justify-center flex-shrink-0">
+        <Icon className="w-6 h-6 sm:w-10 sm:h-10 p-1 text-[#FE5E0E]" />
       </div>
-      <p className="font-semibold">{code}</p>
-      <p className="text-sm text-[#52637A]">{about}</p>
+      <p className="font-semibold text-sm sm:text-base text-center">{code}</p>
+      <p className="text-xs sm:text-sm text-[#52637A] text-center">{about}</p>
     </div>
   );
 };
 
 const Certification = () => {
   return (
-    <div className="px-2 py-4 text-center font-Montserrat">
-      <div>
-        <h4 className="text-4xl my-2 font-bold">
+    <div className="px-4 sm:px-6 lg:px-8 py-8 text-center font-Montserrat">
+      {/* Header Section */}
+      <div className="max-w-4xl w-auto mx-auto mb-8 sm:mb-12">
+        <h4 className="text-2xl sm:text-3xl lg:text-4xl my-4 font-bold">
           Quality Certifications & Compliance
         </h4>
-        <p className="my-2 text-lg text-[#52637A]">
+        <p className="my-4 text-base sm:text-lg text-[#52637A]">
           Meeting global standards with internationally recognized
           certifications
         </p>
-        <span className="text-sm text-[#52637A] flex items-center justify-center my-2">
-          <p>Mfg. Lic no. MFG/MD/2023/000116</p> <Dot />
+        <div className="text-xs sm:text-sm text-[#52637A] flex flex-col sm:flex-row items-center justify-center my-4 gap-2">
+          <p>Mfg. Lic no. MFG/MD/2023/000116</p>
+          <Dot className="hidden sm:block" />
           <p>MDR-5 & MD 42 Licensed</p>
-        </span>
+        </div>
+      </div>
 
-        <div className="flex items-center justify-center gap-6 my-8">
+      {/* Certification Cards Grid */}
+      <div className="mx-auto mb-8 sm:mb-12">
+        <div className="flex flex-wrap gap-4 px-12 sm:gap-6 justify-center">
           <Card
             icon={Award}
             code="ISO 9001:2015"
@@ -81,67 +81,79 @@ const Certification = () => {
             about="Recognized Startup"
           />
         </div>
-        <div className="border-[#1679CA33] bg-[#DBECFA] px-4 h-[32rem] rounded-lg flex gap-8 m-11 justify-center items-center">
-          {/* left text section */}
-          <div className="text-start w-1/2 p-4">
-            <h4 className="font-bold text-black text-2xl">
+      </div>
+
+      {/* Main Content Section */}
+      <div className="max-w-full mx-auto">
+        <div className="border-[#1679CA33] bg-[#DBECFA] rounded-lg flex flex-col lg:flex-row gap-6 lg:gap-8 p-4 sm:p-6 lg:p-8 justify-center items-center">
+          {/* Text Content */}
+          <div className="w-full lg:w-1/2 text-start">
+            <h4 className="font-bold text-black text-xl sm:text-2xl mb-4">
               Committed to Quality Excellence
             </h4>
-            <p className="text-[#52637A] ">
+            <p className="text-[#52637A] text-sm sm:text-base mb-6 leading-relaxed">
               Our state-of-the-art manufacturing facility in Surat, Gujarat
               operates under strict quality control measures. Every product
               undergoes rigorous testing in our in-house laboratory to ensure
               compliance with international standards.
             </p>
-            <ul className="list-none space-y-2">
-              <li className="flex gap-2">
-                <CircleCheckBig className="text-[#21C45D]" />{" "}
-                <p>Strict raw material quality checks</p>
+
+            {/* Quality Features List */}
+            <ul className="list-none space-y-3 mb-6">
+              <li className="flex gap-3 items-start">
+                <CircleCheckBig className="text-[#21C45D] flex-shrink-0 w-5 h-5 mt-0.5" />
+                <p className="text-sm sm:text-base">
+                  Strict raw material quality checks
+                </p>
               </li>
-              <li className="flex gap-2">
-                <CircleCheckBig className="text-[#21C45D]" />{" "}
-                <p>In-process quality monitoring</p>
+              <li className="flex gap-3 items-start">
+                <CircleCheckBig className="text-[#21C45D] flex-shrink-0 w-5 h-5 mt-0.5" />
+                <p className="text-sm sm:text-base">
+                  In-process quality monitoring
+                </p>
               </li>
-              <li className="flex gap-2">
-                <CircleCheckBig className="text-[#21C45D]" />{" "}
-                <p>Final product inspection & testing</p>
+              <li className="flex gap-3 items-start">
+                <CircleCheckBig className="text-[#21C45D] flex-shrink-0 w-5 h-5 mt-0.5" />
+                <p className="text-sm sm:text-base">
+                  Final product inspection & testing
+                </p>
               </li>
-              <li className="flex gap-2">
-                <CircleCheckBig className="text-[#21C45D]" />{" "}
-                <p>Batch traceability & documentation</p>
+              <li className="flex gap-3 items-start">
+                <CircleCheckBig className="text-[#21C45D] flex-shrink-0 w-5 h-5 mt-0.5" />
+                <p className="text-sm sm:text-base">
+                  Batch traceability & documentation
+                </p>
               </li>
             </ul>
-            <div className="my-4 gap-4 flex font-Inter">
-              <Button className="bg-[#FE5E0E] hover:bg-[#FE5E0E] shadow-sm text-sm">
-                View All Certificate <FileText className="w-5 h-5 text-white" />
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 font-Inter">
+              <Button className="bg-[#FE5E0E] hover:bg-[#FE5E0E] shadow-sm text-sm flex items-center justify-center gap-2">
+                View All Certificates
+                <FileText className="w-4 h-4 text-white" />
               </Button>
-              <Button className="bg-white hover:bg-white/10 shadow-sm text-black ">
+              <Button className="bg-white hover:bg-white/90 shadow-sm text-black border border-gray-200">
                 Download Quality Policy
               </Button>
             </div>
           </div>
 
-          {/* certificate images */}
-
-          <div className="w-1/2 flex flex-col items-center justify-center m-8 p-4 bg-white rounded-lg">
-            <Image
-              src="/images/certi1.png"
-              alt="certificate 1"
-              width={570}
-              height={530}
-              className="rounded-lg shadow-sm"
-              //   fill
-            />
-            {/* <Image
-              src="/images/certi2.png"
-              alt="certificate 2"
-              width={236}
-              height={330}
-            /> */}
-            <p className="m-2 text-[#52637A] text-sm ">
-              Our certifications ensure that every product meets the highest
-              standards of quality and safety
-            </p>
+          {/* Certificate Images */}
+          <div className="w-full lg:w-1/2 flex flex-col items-center justify-center">
+            <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm w-full">
+              <div className="relative w-full h-64 sm:h-80 lg:h-96">
+                <Image
+                  src="/images/certi1.png"
+                  alt="ISO Certification"
+                  fill
+                  className="rounded-lg shadow-sm object-contain"
+                />
+              </div>
+              <p className="mt-4 text-[#52637A] text-xs sm:text-sm text-center">
+                Our certifications ensure that every product meets the highest
+                standards of quality and safety
+              </p>
+            </div>
           </div>
         </div>
       </div>
