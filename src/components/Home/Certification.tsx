@@ -18,7 +18,7 @@ interface CardProps {
 
 const Card = ({ icon: Icon, code, about }: CardProps) => {
   return (
-    <div className="w-[90%] md:p-auto md:w-full max-w-54 h-auto aspect-square flex flex-col gap-2 justify-center items-center border border-[#DAE0E7] shadow-sm rounded-lg p">
+    <div className="w-full max-w-54 h-auto aspect-square flex flex-col gap-2 justify-center items-center border border-[#DAE0E7] shadow-sm rounded-lg p-4">
       <div className="rounded-full w-12 h-12 sm:w-16 sm:h-16 bg-[#DBECFA] flex items-center justify-center flex-shrink-0">
         <Icon className="w-6 h-6 sm:w-10 sm:h-10 p-1 text-[#FE5E0E]" />
       </div>
@@ -32,7 +32,7 @@ const Certification = () => {
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-8 text-center font-Montserrat">
       {/* Header Section */}
-      <div className="max-w-4xl w-auto mx-auto mb-8 sm:mb-12">
+      <div className="max-w-4xl mx-auto mb-8 sm:mb-12">
         <h4 className="text-2xl sm:text-3xl lg:text-4xl my-4 font-bold">
           Quality Certifications & Compliance
         </h4>
@@ -48,8 +48,8 @@ const Certification = () => {
       </div>
 
       {/* Certification Cards Grid */}
-      <div className="mx-auto mb-8 sm:mb-12">
-        <div className="flex flex-wrap gap-4 px-12 sm:gap-6 justify-center">
+      <div className="max-w-7xl mx-auto mb-8 sm:mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 justify-items-center">
           <Card
             icon={Award}
             code="ISO 9001:2015"
@@ -84,7 +84,7 @@ const Certification = () => {
       </div>
 
       {/* Main Content Section */}
-      <div className="max-w-full mx-auto">
+      <div className="max-w-7xl mx-auto">
         <div className="border-[#1679CA33] bg-[#DBECFA] rounded-lg flex flex-col lg:flex-row gap-6 lg:gap-8 p-4 sm:p-6 lg:p-8 justify-center items-center">
           {/* Text Content */}
           <div className="w-full lg:w-1/2 text-start">
