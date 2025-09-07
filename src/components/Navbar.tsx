@@ -17,10 +17,14 @@ const Navbar = () => {
           <p className="flex gap-2 items-center">
             <Phone className="w-4 h-4" /> +91 98765 43210
           </p>
-          <p className="flex gap-2 items-center">
+          <Link
+            href="mailto:info@gamasurgical.in"
+            target="_blank"
+            className="flex gap-2 items-center"
+          >
             <Mail className="w-4 h-4" />
             info@gamasurgical.in
-          </p>
+          </Link>
         </div>
         <div>
           <p>ISO 9001:2015 & ISO 13485:2016 Certified</p>
@@ -187,7 +191,7 @@ const Navbar = () => {
                 Products
               </Link>
               <Link
-                href="/quality"
+                href="/certificate"
                 className="block  text-black hover:text-blue-600 transition-colors border-b border-gray-100"
                 onClick={() => setIsMenuOpen(false)}
               >

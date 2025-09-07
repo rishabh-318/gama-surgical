@@ -30,6 +30,13 @@ export default function ContactMe() {
     e.preventDefault();
     // Handle form submission here
     console.log("Form submitted:", formData);
+    setFormData({
+      companyName: "",
+      contactPerson: "",
+      phone: "",
+      email: "",
+      requirements: "",
+    });
     // You can add API call or form validation logic here
   };
 
@@ -160,9 +167,13 @@ export default function ContactMe() {
                     <Mail className="h-5 w-5 text-[#f97316] mt-1" />
                   </div>
                   <div>
-                    <p className="font-medium text-foreground">
+                    <Link
+                      href="mailto:info@gamasurgical.in"
+                      target="_blank"
+                      className="font-medium text-foreground"
+                    >
                       info@gamasurgical.in
-                    </p>
+                    </Link>
                   </div>
                 </div>
 
@@ -299,7 +310,9 @@ export default function ContactMe() {
               </h4>
               <div className="space-y-2 text-sm text-muted-foreground">
                 <p>+91 98765 43210</p>
-                <p>info@gamasurgical.in</p>
+                <Link href="mailto:info@gamasurgical.in" target="_blank">
+                  info@gamasurgical.in
+                </Link>
                 <p>Surat, Gujarat, India</p>
               </div>
             </div>

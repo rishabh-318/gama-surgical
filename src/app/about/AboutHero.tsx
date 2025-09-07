@@ -55,13 +55,13 @@ const AboutHero = () => {
                 healthcare professionals with dependable, high-quality
                 disposable surgical consumables GAMA Surgical India has grown
                 from a small manufacturing unit into a trusted partner for
-                medical facilities across India and abroad. Rooted in Surat's
-                industrial ecosystem, we blended traditional manufacturing
-                discipline with modern quality systems to deliver products that
-                clinicians rely on every day: from dressings and gauze to
-                surgical drapes, masks and catheters. Our beginnings were
-                humble; our commitment to patient safety and consistent delivery
-                is what scaled us.
+                medical facilities across India and abroad. Rooted in
+                Surat&apos;s industrial ecosystem, we blended traditional
+                manufacturing discipline with modern quality systems to deliver
+                products that clinicians rely on every day: from dressings and
+                gauze to surgical drapes, masks and catheters. Our beginnings
+                were humble; our commitment to patient safety and consistent
+                delivery is what scaled us.
               </p>
             </div>
           </div>

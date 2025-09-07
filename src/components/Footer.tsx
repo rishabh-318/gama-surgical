@@ -155,7 +155,9 @@ const Footer = () => {
             <li className="flex items-start justify-start gap-4 mb-2">
               <Mail className="text-[#FE5E0E] flex-shrink-0 mt-1" />
               <div>
-                <p>info@gamasurgical.in</p>
+                <Link href="mailto:info@gamasurgical.in" target="_blank">
+                  info@gamasurgical.in
+                </Link>
                 <p>inquiry@gamasurgicals.in</p>
               </div>
             </li>
