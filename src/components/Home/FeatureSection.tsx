@@ -103,6 +103,12 @@ const FeatureSection = () => {
             tags={["Bed Bath Wipes", "Baby Wipes", "Prep Razor"]}
             icon={<Sparkles className="text-[#1679CA] w-6 h-6" />}
           />
+          <FeatureCard
+            heading="Others"
+            subHeading=""
+            tags={[]}
+            icon={<Sparkles className="text-[#1679CA] w-6 h-6" />}
+          />
         </div>
       </div>
 

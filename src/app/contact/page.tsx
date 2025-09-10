@@ -168,11 +168,11 @@ export default function ContactMe() {
                   </div>
                   <div>
                     <Link
-                      href="mailto:info@gamasurgical.in"
+                      href="mailto:inquiry.gama@gmail.com"
                       target="_blank"
                       className="font-medium text-foreground"
                     >
-                      info@gamasurgical.in
+                      inquiry.gama@gmail.com
                     </Link>
                   </div>
                 </div>
@@ -186,9 +186,9 @@ export default function ContactMe() {
                       Registered Office
                     </p>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      301-306, Tirth Arcade, Opp Gokani Hospital,
+                      301-306, Tulsi Arcade, Opp Gokani Hospital,
                       <br />
-                      LH Dhruva Road, Surat - 395002
+                      LH Dhruva Road, Surat, Gujarat, India - 395002
                     </p>
                   </div>
                 </div>
@@ -213,7 +213,7 @@ export default function ContactMe() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-muted mt-16">
+      {/* <footer className="bg-muted mt-16">
         <div className="container mx-auto px-4 py-12">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
@@ -318,7 +318,7 @@ export default function ContactMe() {
             </div>
           </div>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 }

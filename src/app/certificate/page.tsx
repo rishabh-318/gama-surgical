@@ -1,8 +1,8 @@
-import Button from "@/components/ui/Button";
+// import Button from "@/components/ui/Button";
 import {
   Award,
   CircleCheckBig,
-  Download,
+  // Download,
   FileCheck,
   Shield,
 } from "lucide-react";
@@ -153,11 +153,23 @@ const Certificate = () => {
             <CircleCheckBig className="text-[#16A249] w-5 h-5 mt-0.5 flex-shrink-0" />
             <p className="text-sm sm:text-base">GUJ/MD-42/SUR/00097</p>
           </span>
+          <span className="flex gap-3 sm:gap-4 my-2 sm:my-4 items-start">
+            <CircleCheckBig className="text-[#16A249] w-5 h-5 mt-0.5 flex-shrink-0" />
+            <p className="text-sm sm:text-base">RBS</p>
+          </span>
+          <span className="flex gap-3 sm:gap-4 my-2 sm:my-4 items-start">
+            <CircleCheckBig className="text-[#16A249] w-5 h-5 mt-0.5 flex-shrink-0" />
+            <p className="text-sm sm:text-base">FDCA GUJARAT</p>
+          </span>
+          <span className="flex gap-3 sm:gap-4 my-2 sm:my-4 items-start">
+            <CircleCheckBig className="text-[#16A249] w-5 h-5 mt-0.5 flex-shrink-0" />
+            <p className="text-sm sm:text-base">QMS</p>
+          </span>
         </div>
       </div>
 
       {/* Download Section */}
-      <div className="p-6 sm:p-8 pb-0 text-center space-y-6 sm:space-y-8 my-4 px-4">
+      {/* <div className="p-6 sm:p-8 pb-0 text-center space-y-6 sm:space-y-8 my-4 px-4">
         <h3 className="text-xl sm:text-2xl text-[#22282A]">
           Download Certificates
         </h3>
@@ -174,7 +186,7 @@ const Certificate = () => {
             Request Specific Certificate
           </Button>
         </div>
-      </div>
+      </div> */}
 
       {/* Quality Commitment */}
       <div className="p-6 sm:p-8 text-center space-y-6 sm:space-y-8 bg-gradient-to-b from-[#F4FAFB] to-[#FFFFFF] my-12 flex flex-col items-center justify-center">
@@ -189,6 +201,7 @@ const Certificate = () => {
             quality and safety.
           </p>
         </div>
+        {/* our quality commitment */}
         <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md sm:max-w-none lg:px-40">
           <div className="flex-1 border-[#22282A14] bg-white shadow-sm p-4 sm:p-6 border rounded-lg text-center">
             <p className="text-2xl sm:text-3xl bg-gradient-to-r from-[#0553AE] to-[#0697E0] bg-clip-text text-transparent font-normal">

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { ArrowUpRight, Shield } from "lucide-react";
 import BadgeIcon from "../CustomIcons/BadgeIcon";
@@ -91,7 +92,10 @@ const Hero = () => {
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-                <Button className="bg-white text-[#1679CA] px-6 sm:px-8 py-3 rounded-lg font-semibold text-base sm:text-lg hover:bg-white/95 transition-all duration-300 flex items-center justify-center group">
+                <Button
+                  className="bg-white text-[#1679CA] px-6 sm:px-8 py-3 rounded-lg font-semibold text-base sm:text-lg hover:bg-white/95 transition-all duration-300 flex items-center justify-center group"
+                  onClick={() => (window.location.href = "tel:+919484449452")}
+                >
                   Request a Sample
                   <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
@@ -103,11 +107,11 @@ const Hero = () => {
               </div>
 
               {/* Statistics */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 pt-6 sm:pt-8">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 py-4">
                 <StatItem number="50+" label="Products" />
                 <StatItem number="1000+" label="Clients" />
                 <StatItem number="5+" label="Years" />
-                <StatItem number="1" label="Country" />
+                <StatItem number="20+" label="Countries" />
               </div>
             </div>
 

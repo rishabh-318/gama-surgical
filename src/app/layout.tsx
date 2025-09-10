@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Gama Surgical",
-  description: "Gama Surgical India Pvt. Ltd.",
+  title: "Gama Surgicals",
+  description: "Gama Surgicals India Pvt. Ltd. | Choice of experts",
 };
 
 export default function RootLayout({

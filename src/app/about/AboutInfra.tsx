@@ -64,7 +64,7 @@ const AboutInfra = () => {
         </h4>
         <p className="text-sm sm:text-base text-[#6A767C] leading-relaxed">
           547-548, RJD Textile Park, Hazira Road, Ichchhapore, Surat - 394510,
-          Gujarat
+          Gujarat, India
         </p>
       </div>
     </div>

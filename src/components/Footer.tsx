@@ -119,6 +119,9 @@ const Footer = () => {
             <li className="hover:text-[#FE5E0E] transition-colors cursor-pointer">
               Wipes & Cleaning
             </li>
+            <li className="hover:text-[#FE5E0E] transition-colors cursor-pointer">
+              Others
+            </li>
           </ul>
         </div>
 
@@ -145,20 +148,29 @@ const Footer = () => {
               </div>
               <p className="pl-8">
                 547-548, RJD Textile Park, Hazira Road, Ichchhapore, Surat -
-                394510, Gujarat
+                394510, Gujarat, India
               </p>
             </li>
             <li className="flex items-center justify-start gap-4 mb-2">
               <Phone className="text-[#FE5E0E] flex-shrink-0" />
               <p>+91 98765 43210</p>
             </li>
-            <li className="flex items-start justify-start gap-4 mb-2">
+            <li className="flex  justify-start gap-4 mb-2 items-center">
               <Mail className="text-[#FE5E0E] flex-shrink-0 mt-1" />
-              <div>
-                <Link href="mailto:info@gamasurgical.in" target="_blank">
-                  info@gamasurgical.in
+              <div className="flex flex-col">
+                <Link
+                  href="mailto:gamasurgicalrjdoffice@gmail.com"
+                  target="_blank"
+                >
+                  gamasurgicalrjdoffice@gmail.com
                 </Link>
-                <p>inquiry@gamasurgicals.in</p>
+                <Link href="mailto:info.gamasurgical@gmail.com" target="_blank">
+                  info.gamasurgical@gmail.com
+                </Link>
+
+                <Link href="mailto:inquiry.gama@gmail.com" target="_blank">
+                  inquiry.gama@gmail.com
+                </Link>
               </div>
             </li>
           </ul>

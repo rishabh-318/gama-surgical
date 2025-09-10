@@ -83,19 +83,26 @@ const Navbar = () => {
 
         {/* Action Buttons - Hidden on small screens */}
         <div className="hidden lg:flex gap-2">
-          <Button
-            variant="outline-primary"
-            textColor="#1D2530"
-            className="border border-[#DAE0E7] text-sm"
-            icon={<DocumentIcon />}
+          <a
+            href="/catalog/prodcatalog.pdf"
+            download
+            className="w-full h-full flex items-center justify-center "
           >
-            Download Catalog
-          </Button>
+            <Button
+              variant="outline-primary"
+              textColor="#1D2530"
+              className="border border-[#DAE0E7] text-sm"
+              icon={<DocumentIcon />}
+            >
+              Download Catalog
+            </Button>
+          </a>
           <Button
             variant="gradient-primary"
             bgColor="#1679CA"
             className="text-sm"
             textColor="white"
+            onClick={() => (window.location.href = "tel:+919484449452")}
           >
             Request Sample
           </Button>
@@ -183,19 +190,26 @@ const Navbar = () => {
 
               {/* Mobile action buttons */}
               <div className="flex flex-col gap-3 pt-4">
-                <Button
-                  variant="outline-primary"
-                  textColor="#1D2530"
-                  className="border border-[#DAE0E7] text-sm w-full justify-center"
-                  icon={<DocumentIcon />}
+                <a
+                  href="/catalog/prodcatalog.pdf"
+                  download
+                  className="w-full h-full flex items-center justify-center "
                 >
-                  Download Catalog
-                </Button>
+                  <Button
+                    variant="outline-primary"
+                    textColor="#1D2530"
+                    className="border border-[#DAE0E7] text-sm w-full justify-center"
+                    icon={<DocumentIcon />}
+                  >
+                    Download Catalog
+                  </Button>
+                </a>
                 <Button
                   variant="gradient-primary"
                   bgColor="#1679CA"
                   className="text-sm w-full justify-center"
                   textColor="white"
+                  onClick={() => (window.location.href = "tel:+919484449452")}
                 >
                   Request Sample
                 </Button>

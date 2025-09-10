@@ -16,6 +16,7 @@ const ContactGama = () => {
       plasters: false,
       gloves: false,
       wipes: false,
+      others: false,
     },
     requirements: "",
     agreeToComms: false,
@@ -194,6 +195,16 @@ const ContactGama = () => {
                         <span className="text-sm text-gray-700">
                           Catheters & Tubes
                         </span>
+                      </label>
+                      <label className="flex items-center space-x-3 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          name="categories.wipes"
+                          checked={formData.categories.others}
+                          onChange={handleInputChange}
+                          className="w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
+                        />
+                        <span className="text-sm text-gray-700">Others</span>
                       </label>
                     </div>
                     <div className="space-y-2 sm:space-y-3">

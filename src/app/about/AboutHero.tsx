@@ -20,8 +20,8 @@ const FeatureCard = ({ title, subheading }: FeatureCardProps) => (
 const stats = [
   { title: "2020", subheading: "Established" },
   { title: "50+", subheading: "Products" },
-  { title: "500+", subheading: "Clients" },
-  { title: "9+", subheading: "Certifications" },
+  { title: "1000+", subheading: "Clients" },
+  { title: "10+", subheading: "Certifications" },
 ];
 
 const AboutHero = () => {

@@ -27,6 +27,7 @@ export const categories = [
   "Protective Equipment",
   "Surgical Instruments",
   "Disposable Supplies",
+  "Others",
 ];
 
 export const products = [
