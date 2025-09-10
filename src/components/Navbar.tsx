@@ -5,6 +5,11 @@ import Button from "./ui/Button";
 import Link from "next/link";
 import { Mail, Phone, X, Menu } from "lucide-react";
 import DocumentIcon from "./CustomIcons/DocumentIcon";
+import { useRef, useEffect } from "react";
+// import { useRouter } from "next/router";
+
+import { categories } from "@/lib/products-data";
+import { usePathname, useRouter } from "next/navigation";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -60,36 +65,7 @@ const Navbar = () => {
           >
             About
           </Link>
-          <Link href="/products" className="relative">
-            <select
-              name="products"
-              id="products"
-              defaultValue=""
-              className="appearance-none border-0 outline-0 bg-transparent text-black hover:text-blue-600 transition-colors flex items-center gap-2 cursor-pointer px-2 pr-4 py-1"
-            >
-              <option value="" disabled>
-                Products
-              </option>
-              <option value="a">a</option>
-              <option value="b">b</option>
-              <option value="c">c</option>
-            </select>
-
-            {/* Dropdown arrow */}
-            <svg
-              className="w-4 h-4 absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </Link>
+          <ProductDropdown />
 
           <Link
             href="/certificate"
@@ -246,5 +222,109 @@ const Navbar = () => {
     </div>
   );
 };
+
+function ProductDropdown() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Handle clicking on "Products" text - direct navigation
+  const handleProductsClick = () => {
+    setIsOpen(false);
+    router.push("/products");
+  };
+
+  // Handle dropdown toggle
+  const handleDropdownToggle = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsOpen(!isOpen);
+  };
+
+  // Handle category selection
+  const handleCategorySelect = (category: string) => {
+    setIsOpen(false);
+    // Navigate to products page with category filter
+    router.push(`/products?category=${category}`);
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Close dropdown on route change
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
+  return (
+    <div className="relative" ref={dropdownRef}>
+      <div className="flex items-center">
+        {/* Products text - clickable for direct navigation */}
+        <button
+          onClick={handleProductsClick}
+          className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
+        >
+          Products
+        </button>
+
+        {/* Dropdown arrow - clickable for dropdown toggle */}
+        <button
+          onClick={handleDropdownToggle}
+          className="ml-1 p-1 text-gray-500 hover:text-blue-600 transition-colors duration-200"
+          aria-label="Toggle products menu"
+        >
+          <svg
+            className={`w-4 h-4 transform transition-transform duration-200 ${
+              isOpen ? "rotate-180" : ""
+            }`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </button>
+      </div>
+
+      {/* Dropdown menu */}
+      {isOpen && (
+        <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-md shadow-lg border border-gray-200 py-2 z-50">
+          <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide border-b border-gray-100">
+            Categories
+          </div>
+          {categories.map((category, index) => (
+            <button
+              key={index}
+              onClick={() => handleCategorySelect(category)}
+              className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150"
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default Navbar;

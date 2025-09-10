@@ -104,10 +104,10 @@ const Hero = () => {
 
               {/* Statistics */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 pt-6 sm:pt-8">
-                <StatItem number="500+" label="Products" />
+                <StatItem number="50+" label="Products" />
                 <StatItem number="1000+" label="Clients" />
-                <StatItem number="15+" label="Years" />
-                <StatItem number="25+" label="Countries" />
+                <StatItem number="5+" label="Years" />
+                <StatItem number="1" label="Country" />
               </div>
             </div>
 

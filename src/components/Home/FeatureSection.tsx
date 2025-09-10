@@ -62,7 +62,7 @@ const FeatureSection = () => {
 
       {/* Responsive grid container */}
       <div className="w-full max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-4 justify-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-4 justify-items-center">
           <FeatureCard
             heading="Dressings & Bandages"
             subHeading="Sterile and non-sterile wound care solutions"
@@ -72,7 +72,7 @@ const FeatureSection = () => {
           <FeatureCard
             heading="Plasters & Tapes"
             subHeading="Medical adhesive tapes and compression bandages"
-            tags={["GAMA's Plast", "Surgical Tape", "Adhesive Bandages"]}
+            tags={["Adhesive", "Tape", "U.S.P"]}
             icon={<Heart className="text-[#1679CA] w-6 h-6" />}
           />
           <FeatureCard
@@ -90,13 +90,17 @@ const FeatureSection = () => {
           <FeatureCard
             heading="Catheters & Tubes"
             subHeading="Foley catheters and medical tubing solutions"
-            tags={["Foley Catheter", "Suction Tubes", "IV Sets"]}
+            tags={[
+              "Selicone Foley Catheter",
+              "Suction Tubes",
+              "Ballon Catheter",
+            ]}
             icon={<Syringe className="text-[#1679CA] w-6 h-6" />}
           />
           <FeatureCard
             heading="Wipes & Cleaning"
             subHeading="Medical wipes and cleaning solutions"
-            tags={["Alcohol Wipes", "Cotton Rolls", "Cleaning Solutions"]}
+            tags={["Bed Bath Wipes", "Baby Wipes", "Prep Razor"]}
             icon={<Sparkles className="text-[#1679CA] w-6 h-6" />}
           />
         </div>

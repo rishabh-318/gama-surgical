@@ -63,8 +63,8 @@ const AboutInfra = () => {
           Factory Address:
         </h4>
         <p className="text-sm sm:text-base text-[#6A767C] leading-relaxed">
-          Plot No. 123, GIDC Industrial Estate, Pandesara, Surat - 394221,
-          Gujarat, India
+          547-548, RJD Textile Park, Hazira Road, Ichchhapore, Surat - 394510,
+          Gujarat
         </p>
       </div>
     </div>

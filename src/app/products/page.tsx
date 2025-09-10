@@ -7,165 +7,29 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/Checkbox";
 import Image from "next/image";
-
-const products = [
-  {
-    id: 1,
-    name: "Digital Blood Pressure Monitor",
-    sku: "BP-MON-001",
-    description:
-      "Accurate and easy-to-use digital blood pressure monitor with large display.",
-    image: "",
-    tags: ["Monitoring", "Healthcare Devices"],
-    sizes: ["Standard"],
-    category: "Diagnostic Equipment",
-    sterility: "Non-sterile",
-  },
-  {
-    id: 2,
-    name: "Pulse Oximeter",
-    sku: "OXI-002",
-    description:
-      "Compact fingertip oximeter for measuring SpO2 and pulse rate.",
-    image: "",
-    tags: ["Monitoring", "Healthcare Devices"],
-    sizes: ["Standard"],
-    category: "Diagnostic Equipment",
-    sterility: "Non-sterile",
-  },
-  {
-    id: 3,
-    name: "Nitrile Examination Gloves",
-    sku: "GLV-NIT-003",
-    description: "Powder-free nitrile gloves for medical and laboratory use.",
-    image: "",
-    tags: ["Gloves", "Wipes & Cleaning"],
-    sizes: ["Small", "Medium", "Large"],
-    category: "Protective Equipment",
-    sterility: "Non-sterile",
-  },
-  {
-    id: 4,
-    name: "Digital Thermometer",
-    sku: "THERM-004",
-    description: "Fast and accurate digital thermometer with flexible tip.",
-    image: "",
-    tags: ["Monitoring", "Thermometers"],
-    sizes: ["Standard"],
-    category: "Diagnostic Equipment",
-    sterility: "Sterile",
-  },
-  {
-    id: 5,
-    name: "Stethoscope Professional",
-    sku: "STETH-005",
-    description: "Professional-grade stethoscope for precise auscultation.",
-    image: "",
-    tags: ["Monitoring", "Medical Tools"],
-    sizes: ["Standard"],
-    category: "Diagnostic Equipment",
-    sterility: "Non-sterile",
-  },
-  {
-    id: 6,
-    name: "Surgical Masks Box",
-    sku: "MASK-006",
-    description:
-      "Box of high-quality disposable surgical masks for protection.",
-    image: "",
-    tags: ["Masks", "Wipes & Cleaning"],
-    sizes: ["Box of 50", "Box of 100"],
-    category: "Protective Equipment",
-    sterility: "Sterile",
-  },
-  {
-    id: 7,
-    name: "Medical Scissors",
-    sku: "SCISS-007",
-    description:
-      "Durable stainless steel scissors for surgical and medical use.",
-    image: "",
-    tags: ["Medical Tools"],
-    sizes: ["10CMS x 1MTRS", "10CMS x 4MTRS"],
-    category: "Surgical Instruments",
-    sterility: "Sterile",
-  },
-  {
-    id: 8,
-    name: "Latex Gloves",
-    sku: "GLV-LTX-008",
-    description:
-      "Comfortable latex gloves suitable for examination and cleaning.",
-    image: "",
-    tags: ["Gloves", "Wipes & Cleaning"],
-    sizes: ["Small", "Medium", "Large"],
-    category: "Protective Equipment",
-    sterility: "Non-sterile",
-  },
-  {
-    id: 9,
-    name: "Disposable Syringes",
-    sku: "SYR-009",
-    description: "Sterile disposable syringes for medical and laboratory use.",
-    image: "",
-    tags: ["Syringes", "Medical Supplies"],
-    sizes: ["1ml", "5ml", "10ml"],
-    category: "Disposable Supplies",
-    sterility: "Sterile",
-  },
-  {
-    id: 10,
-    name: "Alcohol Prep Pads",
-    sku: "PADS-010",
-    description:
-      "Individually wrapped alcohol pads for cleaning and disinfection.",
-    image: "",
-    tags: ["Wipes & Cleaning"],
-    sizes: ["Box of 100", "Box of 200"],
-    category: "Disposable Supplies",
-    sterility: "Sterile",
-  },
-];
-
-const categories = [
-  "All Products",
-  "Diagnostic Equipment",
-  "Protective Equipment",
-  "Surgical Instruments",
-  "Disposable Supplies",
-  "Patient Care",
-  "Laboratory Equipment",
-];
+import { useRouter, useSearchParams } from "next/navigation";
+import { categories, Product, products } from "@/lib/products-data";
 
 const sterilityOptions = ["All Products", "Sterile", "Non-sterile"];
 
-const sortOptions = [
-  { value: "name", label: "Product Name" },
-  { value: "price-low", label: "Price: Low to High" },
-  { value: "price-high", label: "Price: High to Low" },
-  { value: "rating", label: "Rating" },
-];
-
-export default function Products() {
-  const [selectedCategory, setSelectedCategory] = useState("All Products");
+export default function ProductCatalog() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const initialCategory = searchParams.get("category") || "All Products";
+  // Catalog filters
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [selectedSterility, setSelectedSterility] = useState("All Products");
-  const [sortBy, setSortBy] = useState("name");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Filter and sort products
+  // Filter products for catalog view
   const filteredProducts = useMemo(() => {
-    const filtered = products.filter((product) => {
-      // Category filter
+    return products.filter((product) => {
       const categoryMatch =
         selectedCategory === "All Products" ||
         product.category === selectedCategory;
-
-      // Sterility filter
       const sterilityMatch =
         selectedSterility === "All Products" ||
         product.sterility === selectedSterility;
-
-      // Search filter (name, SKU, description)
       const searchMatch =
         searchQuery === "" ||
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -174,25 +38,12 @@ export default function Products() {
 
       return categoryMatch && sterilityMatch && searchMatch;
     });
-
-    // Sort products
-    // filtered.sort((a, b) => {
-    //   switch (sortBy) {
-    //     case "name":
-    //       return a.name.localeCompare(b.name);
-    //     case "price-low":
-    //       return (a.price || 0) - (b.price || 0);
-    //     case "price-high":
-    //       return (b.price || 0) - (a.price || 0);
-    //     case "rating":
-    //       return (b.rating || 0) - (a.rating || 0);
-    //     default:
-    //       return 0;
-    //   }
-    // });
-
-    return filtered;
   }, [selectedCategory, selectedSterility, searchQuery]);
+
+  // Handle view details click - navigate to separate page
+  const handleViewDetails = (product: Product) => {
+    router.push(`/products/${product.id}/details`);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -203,9 +54,9 @@ export default function Products() {
           quality standards
         </p>
       </div>
-      {/* div Content */}
+
       <div className="container mx-auto px-10 py-8">
-        <div className="flex flex-col lg:flex-row gap-8 ">
+        <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar Filters */}
           <aside className="lg:w-fit space-y-6">
             <Card>
@@ -214,8 +65,9 @@ export default function Products() {
                   <Filter className="h-5 w-5 mr-2 text-[#FE5E0E]" />
                   Filters
                 </h3>
+
                 <p>Search Products</p>
-                <div className="relative hidden md:block text-[#52637A]">
+                <div className="relative text-[#52637A]">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                   <Input
                     type="search"
@@ -225,15 +77,16 @@ export default function Products() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
                 </div>
+
                 {/* Categories */}
-                <div className="space-y-6 ">
+                <div className="space-y-6">
                   <div>
                     <h4 className="font-medium mb-3">Categories</h4>
                     <div className="space-y-4">
                       {categories.map((category) => (
                         <div
                           key={category}
-                          className="flex items-center space-x-2 "
+                          className="flex items-center space-x-2"
                         >
                           <Checkbox
                             id={category}
@@ -245,7 +98,7 @@ export default function Products() {
                           />
                           <label
                             htmlFor={category}
-                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                            className="text-sm font-medium leading-none cursor-pointer"
                           >
                             {category}
                           </label>
@@ -254,6 +107,7 @@ export default function Products() {
                     </div>
                   </div>
                 </div>
+
                 <div>
                   <h4>Sterility</h4>
                   <select
@@ -264,20 +118,6 @@ export default function Products() {
                     {sterilityOptions.map((option) => (
                       <option key={option} value={option}>
                         {option}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <h4>Sort by</h4>
-                  <select
-                    className="border border-gray-300 rounded-md px-3 py-1 text-sm w-35"
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
-                  >
-                    {sortOptions.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
                       </option>
                     ))}
                   </select>
@@ -304,11 +144,10 @@ export default function Products() {
               {filteredProducts.map((product) => (
                 <Card
                   key={product.id}
-                  className="group shadow rounded-lg border-[#DAE0E7]  overflow-hidden"
+                  className="group shadow rounded-lg border-[#DAE0E7] overflow-hidden"
                 >
                   <CardContent className="p-4 space-y-3">
-                    {/* Product Image */}
-                    <div className=" bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center">
+                    <div className="bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center">
                       <Image
                         src={product.image || "/images/placeholder.png"}
                         alt={product.name}
@@ -318,7 +157,6 @@ export default function Products() {
                       />
                     </div>
 
-                    {/* Product Details */}
                     <div className="space-y-2">
                       <h3 className="font-semibold text-[1rem] text-gray-900 line-clamp-2">
                         {product.name}
@@ -326,7 +164,6 @@ export default function Products() {
                       <p className="text-xs text-[#52637A]">
                         SKU: {product.sku}
                       </p>
-
                       <p className="text-sm text-gray-600 line-clamp-2">
                         {product.description}
                       </p>
@@ -341,7 +178,7 @@ export default function Products() {
                         {product.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="text-xs bg-gray-200 text-gray-700 p-2  rounded-lg flex items-center justify-center"
+                            className="text-xs bg-gray-200 text-gray-700 p-2 rounded-lg flex items-center justify-center"
                           >
                             {tag}
                           </span>
@@ -357,7 +194,10 @@ export default function Products() {
 
                       {/* Action Buttons */}
                       <div className="flex gap-2 mt-3">
-                        <Button className="w-full bg-transparent hover:bg-transparent border border-[#DAE0E7] text-black">
+                        <Button
+                          className="w-full bg-transparent hover:bg-transparent border border-[#DAE0E7] text-black"
+                          onClick={() => handleViewDetails(product)}
+                        >
                           View Details
                         </Button>
                         <Button className="w-full border-[blue-500] text-white shadow-sm shadow-[#1D25301A] bg-[#FE5E0E] hover:bg-[#FE5E0E]">

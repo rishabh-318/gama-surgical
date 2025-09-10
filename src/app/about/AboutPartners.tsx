@@ -14,7 +14,7 @@ const AboutPartners = () => {
 
       <div className="shadow-sm shadow-[#0000000D] space-y-4 rounded-lg w-full max-w-4xl mx-auto p-6 sm:p-8 bg-gradient-to-b from-[#F4FAFB] to-[#FFFFFF]">
         <h4 className="text-lg sm:text-xl font-medium">
-          Aarchi Distributor - Surat
+          Touch Safe Surgical - Surat
         </h4>
         <p className="text-[#6A767C] text-sm sm:text-base leading-relaxed">
           Our key distribution partner managing local supply and logistics with

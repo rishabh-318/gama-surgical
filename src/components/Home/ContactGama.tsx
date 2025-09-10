@@ -347,19 +347,19 @@ const ContactGama = () => {
               <ul className="space-y-2 text-xs sm:text-sm text-[#52637A]">
                 <li className="flex items-start">
                   <span className="mr-2 font-bold">•</span>
-                  <span>15+ years of manufacturing excellence</span>
+                  <span>5+ years of manufacturing excellence</span>
                 </li>
                 <li className="flex items-start">
                   <span className="mr-2 font-bold">•</span>
                   <span>Serving 1000+ healthcare institutions</span>
                 </li>
-                <li className="flex items-start">
+                {/* <li className="flex items-start">
                   <span className="mr-2 font-bold">•</span>
                   <span>Export to 25+ countries worldwide</span>
-                </li>
+                </li> */}
                 <li className="flex items-start">
                   <span className="mr-2 font-bold">•</span>
-                  <span>Complete range of 500+ products</span>
+                  <span>Complete range of 50+ products</span>
                 </li>
                 <li className="flex items-start">
                   <span className="mr-2 font-bold">•</span>
