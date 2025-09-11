@@ -12,6 +12,7 @@ import {
   Youtube,
 } from "lucide-react";
 import Link from "next/link";
+import Button from "./ui/Button";
 
 const Footer = () => {
   const [userMail, setUserMail] = useState<string>("");
@@ -34,9 +35,9 @@ const Footer = () => {
             onChange={(e) => setUserMail(e.target.value)}
             className="min-w-[15rem] bg-white rounded border-[#F0F2F5] flex-1 sm:flex"
           />
-          <button className="w-full sm:w-[6rem] h-8 bg-[#FE5E0E] text-white rounded-sm shadow-sm">
+          <Button className="w-full sm:w-[6rem] bg-[#FE5E0E] text-white rounded-sm shadow-sm">
             Subscribe
-          </button>
+          </Button>
         </div>
       </div>
 

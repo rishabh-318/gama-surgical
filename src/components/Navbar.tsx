@@ -97,15 +97,17 @@ const Navbar = () => {
               Download Catalog
             </Button>
           </a>
-          <Button
-            variant="gradient-primary"
-            bgColor="#1679CA"
-            className="text-sm"
-            textColor="white"
-            onClick={() => (window.location.href = "tel:+919484449452")}
-          >
-            Request Sample
-          </Button>
+          <Link href={`tel:+919484449452`}>
+            <Button
+              variant="gradient-primary"
+              bgColor="#1679CA"
+              className="text-sm"
+              textColor="white"
+              // onClick={() => (window.location.href = "tel:+919484449452")}
+            >
+              Request Sample
+            </Button>
+          </Link>
         </div>
 
         {/* Mobile menu button */}
@@ -204,15 +206,17 @@ const Navbar = () => {
                     Download Catalog
                   </Button>
                 </a>
-                <Button
-                  variant="gradient-primary"
-                  bgColor="#1679CA"
-                  className="text-sm w-full justify-center"
-                  textColor="white"
-                  onClick={() => (window.location.href = "tel:+919484449452")}
-                >
-                  Request Sample
-                </Button>
+                <Link href={`tel:+919484449452`}>
+                  <Button
+                    variant="gradient-primary"
+                    bgColor="#1679CA"
+                    className="text-sm"
+                    textColor="white"
+                    // onClick={() => (window.location.href = "tel:+919484449452")}
+                  >
+                    Request Sample
+                  </Button>
+                </Link>
               </div>
 
               {/* Mobile contact info */}
