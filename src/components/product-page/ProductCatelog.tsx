@@ -250,7 +250,7 @@ export default function ProductCatalog() {
                 </div>
                 <div>
                   <a
-                    href="/catalog/ProductCatelog.pdf"
+                    href="/catalog/prodcatalog.pdf"
                     download
                     className="w-full h-full flex items-center justify-center"
                   >
@@ -335,14 +335,20 @@ export default function ProductCatalog() {
                                 View Details
                               </Button>
                             </Link>
-                            <Button
-                              className="w-full border-[blue-500] text-white shadow-sm shadow-[#1D25301A] bg-[#FE5E0E] hover:bg-[#FE5E0E]"
-                              onClick={() =>
-                                (window.location.href = "tel:+919484449452")
-                              }
+                            <a
+                              href={`https://wa.me/${process.env.NEXT_PUBLIC_PHONE_NUMBER}?text=Hello! I would like to request a sample.`}
+                              target="_blank"
+                              rel="noopener noreferrer"
                             >
-                              Request Sample
-                            </Button>
+                              <Button
+                                className="w-full border-[blue-500] text-white shadow-sm shadow-[#1D25301A] bg-[#FE5E0E] hover:bg-[#FE5E0E]"
+                                onClick={() =>
+                                  (window.location.href = "tel:+919484449452")
+                                }
+                              >
+                                Request Sample
+                              </Button>
+                            </a>
                           </div>
                         </div>
                       </CardContent>

@@ -1,14 +1,15 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Button from "./ui/Button";
 import Link from "next/link";
 import { Mail, Phone, X, Menu } from "lucide-react";
 import DocumentIcon from "./CustomIcons/DocumentIcon";
 import { useRef, useEffect } from "react";
+
+import { useCategories } from "@/hooks/useCategories";
 // import { useRouter } from "next/router";
 
-import { categories } from "@/lib/products-data";
 import { usePathname, useRouter } from "next/navigation";
 
 const Navbar = () => {
@@ -97,7 +98,11 @@ const Navbar = () => {
               Download Catalog
             </Button>
           </a>
-          <Link href={`tel:+919484449452`}>
+          <a
+            href={`https://wa.me/${process.env.NEXT_PUBLIC_PHONE_NUMBER}?text=Hello! I would like to request a sample.`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Button
               variant="gradient-primary"
               bgColor="#1679CA"
@@ -107,7 +112,7 @@ const Navbar = () => {
             >
               Request Sample
             </Button>
-          </Link>
+          </a>
         </div>
 
         {/* Mobile menu button */}
@@ -131,7 +136,7 @@ const Navbar = () => {
           onClick={() => setIsMenuOpen(false)}
         >
           <div
-            className="bg-white absolute top-0 right-0 w-full max-w-sm p-2 rounded shadow-xl transform transition-transform"
+            className="bg-white absolute top-0 right-0 w-full max-w-sm md:max-w-full p-2 rounded shadow-xl transform transition-transform"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Mobile menu header */}
@@ -168,13 +173,14 @@ const Navbar = () => {
               >
                 About
               </Link>
-              <Link
+              {/* <Link
                 href="/products"
                 className="block  text-black hover:text-blue-600 transition-colors border-b border-gray-100"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Products
-              </Link>
+              </Link> */}
+              <ProductDropdown />
               <Link
                 href="/certificate"
                 className="block  text-black hover:text-blue-600 transition-colors border-b border-gray-100"
@@ -195,7 +201,7 @@ const Navbar = () => {
                 <a
                   href="/catalog/ProductCatelog.pdf"
                   download
-                  className="w-full h-full flex items-center justify-center "
+                  className="w-fit h-full flex items-center justify-center "
                 >
                   <Button
                     variant="outline-primary"
@@ -206,7 +212,11 @@ const Navbar = () => {
                     Download Catalog
                   </Button>
                 </a>
-                <Link href={`tel:+919484449452`}>
+                <a
+                  href={`https://wa.me/${process.env.NEXT_PUBLIC_PHONE_NUMBER}?text=Hello! I would like to request a sample.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Button
                     variant="gradient-primary"
                     bgColor="#1679CA"
@@ -216,7 +226,7 @@ const Navbar = () => {
                   >
                     Request Sample
                   </Button>
-                </Link>
+                </a>
               </div>
 
               {/* Mobile contact info */}
@@ -246,7 +256,17 @@ function ProductDropdown() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
+  const { data: categoriesData, isLoading: categoriesLoading } =
+    useCategories();
+  // Create categories list including "All Products"
+  const categories = useMemo(() => {
+    const allCategories = ["All Products"];
+    if (categoriesData) {
+      allCategories.push(...categoriesData.map((cat) => cat.name));
+    }
+    return allCategories;
+  }, [categoriesData]);
+  console.log(categories);
   // Handle clicking on "Products" text - direct navigation
   const handleProductsClick = () => {
     setIsOpen(false);
@@ -290,12 +310,12 @@ function ProductDropdown() {
   }, [pathname]);
 
   return (
-    <div className="relative" ref={dropdownRef}>
-      <div className="flex items-center">
+    <div className="relative group cursor-pointer" ref={dropdownRef}>
+      <div className="flex items-center cursor-pointer">
         {/* Products text - clickable for direct navigation */}
         <button
           onClick={handleProductsClick}
-          className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
+          className="text-black cursor-pointer hover:text-blue-600  font-medium transition-colors duration-200"
         >
           Products
         </button>
@@ -303,13 +323,11 @@ function ProductDropdown() {
         {/* Dropdown arrow - clickable for dropdown toggle */}
         <button
           onClick={handleDropdownToggle}
-          className="ml-1 p-1 text-gray-500 hover:text-blue-600 transition-colors duration-200"
+          className="ml-1 p-1 text-gray-500 cursor-pointer hover:text-blue-600 transition-colors duration-200"
           aria-label="Toggle products menu"
         >
           <svg
-            className={`w-4 h-4 transform transition-transform duration-200 ${
-              isOpen ? "rotate-180" : ""
-            }`}
+            className={`w-4 h-4 transform group-hover:rotate-180 transition-transform duration-200 `}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -325,12 +343,15 @@ function ProductDropdown() {
       </div>
 
       {/* Dropdown menu */}
-      {isOpen && (
-        <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-md shadow-lg border border-gray-200 py-2 z-50">
-          <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide border-b border-gray-100">
-            Categories
-          </div>
-          {categories.map((category, index) => (
+
+      <div className="absolute top-full left-0 w-54 bg-white rounded-md shadow-lg border border-gray-200 py-2 z-50 hidden group-hover:block cursor-pointer">
+        <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide border-b border-gray-100">
+          Categories
+        </div>
+        {[...categories]
+          .filter((c) => c !== "Others") // take all except Others
+          .concat("Others") // add Others at the end
+          .map((category, index) => (
             <button
               key={index}
               onClick={() => handleCategorySelect(category)}
@@ -339,8 +360,7 @@ function ProductDropdown() {
               {category}
             </button>
           ))}
-        </div>
-      )}
+      </div>
     </div>
   );
 }

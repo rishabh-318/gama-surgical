@@ -189,13 +189,19 @@ export default function ProductDetail() {
 
             {/* Action Buttons */}
             <div className="flex gap-4 pt-6">
-              <Button
-                className="bg-[#FE5E0E] text-white hover:bg-[#E5530C] px-6 py-3"
-                onClick={() => (window.location.href = "tel:+919484449452")}
+              <a
+                href={`https://wa.me/${process.env.NEXT_PUBLIC_PHONE_NUMBER}?text=Hello! I would like to request a sample.`}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <ShoppingCart className="w-5 h-5 mr-2" />
-                Request Sample
-              </Button>
+                <Button
+                  className="bg-[#FE5E0E] text-white hover:bg-[#E5530C] px-6 py-3"
+                  // onClick={() => (window.location.href = "tel:+919484449452")}
+                >
+                  <ShoppingCart className="w-5 h-5 mr-2" />
+                  Request Sample
+                </Button>
+              </a>
             </div>
 
             {/* Additional Product Info */}

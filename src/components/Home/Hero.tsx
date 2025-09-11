@@ -93,13 +93,19 @@ const Hero = () => {
 
               {/* Action Buttons */}
               <div className="flex flex-col items-center sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-                <Button
-                  className="bg-white text-[#1679CA] px-6 sm:px-8 py-3 rounded-lg w-fit font-semibold text-base sm:text-lg hover:bg-white/95 transition-all duration-300 flex items-center justify-center group"
-                  onClick={() => (window.location.href = "tel:+919484449452")}
+                <a
+                  href={`https://wa.me/${process.env.NEXT_PUBLIC_PHONE_NUMBER}?text=Hello! I would like to request a sample.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Request a Sample
-                  <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 ml-2 group-hover:translate-x-1 transition-transform" />
-                </Button>
+                  <Button
+                    className="bg-white text-[#1679CA] px-6 sm:px-8 py-3 rounded-lg w-fit font-semibold text-base sm:text-lg hover:bg-white/95 transition-all duration-300 flex items-center justify-center group"
+                    // onClick={() => (window.location.href = "tel:+919484449452")}
+                  >
+                    Request a Sample
+                    <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </a>
 
                 <Link href="/products">
                   <Button className="bg-[#FE5E0E] border border-white/60 text-white px-6 sm:px-8 py-3 rounded-lg font-semibold text-base sm:text-lg hover:bg-[#FE5E0E]/90 transition-all duration-300 flex items-center justify-center group">
