@@ -42,7 +42,8 @@ export default function ProductCatalog() {
   const debouncedSearch = useDebounce(searchQueryParam, 300);
 
   // Fetch categories
-  const { data: categoriesData, isLoading: categoriesLoading } = useCategories();
+  const { data: categoriesData, isLoading: categoriesLoading } =
+    useCategories();
 
   // Build API query parameters
   const queryParams = useMemo((): ProductQueryParams => {
@@ -56,7 +57,10 @@ export default function ProductCatalog() {
     }
 
     if (selectedSterility && selectedSterility !== "All Products") {
-      params.sterility = selectedSterility === "Sterile" ? Sterility.STERILE : Sterility.NON_STERILE;
+      params.sterility =
+        selectedSterility === "Sterile"
+          ? Sterility.STERILE
+          : Sterility.NON_STERILE;
     }
 
     if (debouncedSearch.trim()) {
@@ -67,13 +71,17 @@ export default function ProductCatalog() {
   }, [selectedCategory, selectedSterility, debouncedSearch]);
 
   // Fetch products using the API
-  const { data: productsData, isLoading: productsLoading, error } = useProducts(queryParams);
+  const {
+    data: productsData,
+    isLoading: productsLoading,
+    error,
+  } = useProducts(queryParams);
 
   // Create categories list including "All Products"
   const categories = useMemo(() => {
     const allCategories = ["All Products"];
     if (categoriesData) {
-      allCategories.push(...categoriesData.map(cat => cat.name));
+      allCategories.push(...categoriesData.map((cat) => cat.name));
     }
     return allCategories;
   }, [categoriesData]);
@@ -117,7 +125,7 @@ export default function ProductCatalog() {
     const q = params.toString();
     // replace so we don't create history entries on every filter change
     router.replace(`/products${q ? `?${q}` : ""}`);
-  }
+  };
 
   // Get filtered products from API response
   const filteredProducts = productsData?.products || [];
@@ -174,33 +182,36 @@ export default function ProductCatalog() {
                       </div>
                     ) : (
                       <div className="space-y-4">
-                        {categories.map((category) => (
-                          <div
-                            key={category}
-                            className="flex items-center space-x-2"
-                          >
-                            <Checkbox
-                              id={category}
-                              checked={selectedCategory === category}
-                              onCheckedChange={(
-                                checked: boolean | "indeterminate"
-                              ) => {
-                                if (checked === true) {
-                                  updateQuery({ category });
-                                } else {
-                                  updateQuery({ category: "All Products" });
-                                }
-                              }}
-                              className="text-[#FE5E0E]"
-                            />
-                            <label
-                              htmlFor={category}
-                              className="text-sm font-medium leading-none cursor-pointer"
+                        {[...categories]
+                          .filter((c) => c !== "Others") // take all except Others
+                          .concat("Others") // add Others at the end
+                          .map((category) => (
+                            <div
+                              key={category}
+                              className="flex items-center space-x-2"
                             >
-                              {category}
-                            </label>
-                          </div>
-                        ))}
+                              <Checkbox
+                                id={category}
+                                checked={selectedCategory === category}
+                                onCheckedChange={(
+                                  checked: boolean | "indeterminate"
+                                ) => {
+                                  if (checked === true) {
+                                    updateQuery({ category });
+                                  } else {
+                                    updateQuery({ category: "All Products" });
+                                  }
+                                }}
+                                className="text-[#FE5E0E]"
+                              />
+                              <label
+                                htmlFor={category}
+                                className="text-sm font-medium leading-none cursor-pointer"
+                              >
+                                {category}
+                              </label>
+                            </div>
+                          ))}
                       </div>
                     )}
                   </div>
@@ -227,118 +238,123 @@ export default function ProductCatalog() {
           </aside>
 
           {/* Product Grid */}
-          <div className="flex-1">
-            <div className="flex justify-between items-center mb-6">
+          <div className="flex-1 w-full">
+            <div className="flex justify-between w-full  items-center mb-6">
               <div className="flex items-center justify-between w-full space-x-4">
-                <span className="text-[1rem] text-gray-600">
+                <div className="text-[1rem] text-gray-600">
                   {productsLoading ? (
                     <Skeleton className="h-4 w-32" />
                   ) : (
                     `Showing ${filteredProducts.length} products`
                   )}
-                </span>
-                <a
-                  href="/catalog/prodcatalog.pdf"
-                  download
-                  className="w-full h-full flex items-center justify-center"
-                >
-                  <Button className="bg-[#FE5E0E] text-white text-sm hover:translate-0 hover:bg-[#FE5E0E]">
-                    <FileText className="w-5 h-5" />
-                    Download Catalog
-                  </Button>
-                </a>
+                </div>
+                <div>
+                  <a
+                    href="/catalog/prodcatalog.pdf"
+                    download
+                    className="w-full h-full flex items-center justify-center"
+                  >
+                    <Button className="bg-[#FE5E0E] text-white text-sm hover:translate-0 hover:bg-[#FE5E0E]">
+                      <FileText className="w-5 h-5" />
+                      Download Catalog
+                    </Button>
+                  </a>
+                </div>
               </div>
             </div>
 
             {error && (
               <div className="text-center py-12">
-                <p className="text-red-500">Error loading products. Please try again.</p>
+                <p className="text-red-500">
+                  Error loading products. Please try again.
+                </p>
               </div>
             )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {productsLoading ? (
-                // Show skeletons while loading
-                Array.from({ length: 6 }).map((_, index) => (
-                  <ProductCardSkeleton key={index} />
-                ))
-              ) : (
-                filteredProducts.map((product) => (
-                  <Card
-                    key={product.id}
-                    className="group shadow rounded-lg border-[#DAE0E7] overflow-hidden"
-                  >
-                    <CardContent className="p-4 space-y-3">
-                      <div className="bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center">
-                        <Image
-                          src={product.images?.[0]?.url || "/images/placeholder.png"}
-                          alt={product.name}
-                          width={250}
-                          height={250}
-                          className="object-cover group-hover:scale-105 transition-transform duration-200 aspect-square"
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <h3 className="font-semibold text-[1rem] text-gray-900 line-clamp-2">
-                          {product.name}
-                        </h3>
-                        <p className="text-sm text-gray-600 line-clamp-2">
-                          {product.description}
-                        </p>
-
-                        {/* Tags */}
-                        <div className="flex flex-wrap gap-2 mt-1">
-                          {product.sterility === Sterility.STERILE && (
-                            <span className="text-[#21C45D] text-xs p-2 bg-[#21C45D1A] flex items-center justify-center rounded-lg">
-                              <Shield className="w-3 h-3" /> Sterile
-                            </span>
-                          )}
-                          {product.categoryNames?.map((category) => (
-                            <span
-                              key={category}
-                              className="text-xs bg-gray-200 text-gray-700 p-2 rounded-lg flex items-center justify-center"
-                            >
-                              {category}
-                            </span>
-                          ))}
-                        </div>
-
-                        {/* Sizes */}
-                        {product.size && (
-                          <p className="text-xs text-gray-500">
-                            Size: {product.size}
-                          </p>
-                        )}
-
-                        {/* Action Buttons */}
-                        <div className="flex gap-2 mt-3">
-                          <Link href={`/products/${product.slug}`}>
-                            <Button
-                              className="w-full bg-transparent hover:bg-transparent border border-[#DAE0E7] text-black"
-                            >
-                              View Details
-                            </Button>
-                          </Link>
-                          <Button
-                            className="w-full border-[blue-500] text-white shadow-sm shadow-[#1D25301A] bg-[#FE5E0E] hover:bg-[#FE5E0E]"
-                            onClick={() =>
-                              (window.location.href = "tel:+919484449452")
+              {productsLoading
+                ? // Show skeletons while loading
+                  Array.from({ length: 6 }).map((_, index) => (
+                    <ProductCardSkeleton key={index} />
+                  ))
+                : filteredProducts.map((product) => (
+                    <Card
+                      key={product.id}
+                      className="group shadow rounded-lg border-[#DAE0E7] overflow-hidden"
+                    >
+                      <CardContent className="p-4 space-y-3">
+                        <div className="bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center">
+                          <Image
+                            src={
+                              product.images?.[0]?.url ||
+                              "/images/placeholder.png"
                             }
-                          >
-                            Request Sample
-                          </Button>
+                            alt={product.name}
+                            width={250}
+                            height={250}
+                            className="object-cover group-hover:scale-105 transition-transform duration-200 aspect-square"
+                          />
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))
-              )}
+
+                        <div className="space-y-2">
+                          <h3 className="font-semibold text-[1rem] text-gray-900 line-clamp-2">
+                            {product.name}
+                          </h3>
+                          <p className="text-sm text-gray-600 line-clamp-2">
+                            {product.description}
+                          </p>
+
+                          {/* Tags */}
+                          <div className="flex flex-wrap gap-2 mt-1">
+                            {product.sterility === Sterility.STERILE && (
+                              <span className="text-[#21C45D] text-xs p-2 bg-[#21C45D1A] flex items-center justify-center rounded-lg">
+                                <Shield className="w-3 h-3" /> Sterile
+                              </span>
+                            )}
+                            {product.categoryNames?.map((category) => (
+                              <span
+                                key={category}
+                                className="text-xs bg-gray-200 text-gray-700 p-2 rounded-lg flex items-center justify-center"
+                              >
+                                {category}
+                              </span>
+                            ))}
+                          </div>
+
+                          {/* Sizes */}
+                          {product.size && (
+                            <p className="text-xs text-gray-500">
+                              Size: {product.size}
+                            </p>
+                          )}
+
+                          {/* Action Buttons */}
+                          <div className="flex gap-2 mt-3">
+                            <Link href={`/products/${product.slug}`}>
+                              <Button className="w-full bg-transparent hover:bg-transparent border border-[#DAE0E7] text-black">
+                                View Details
+                              </Button>
+                            </Link>
+                            <Button
+                              className="w-full border-[blue-500] text-white shadow-sm shadow-[#1D25301A] bg-[#FE5E0E] hover:bg-[#FE5E0E]"
+                              onClick={() =>
+                                (window.location.href = "tel:+919484449452")
+                              }
+                            >
+                              Request Sample
+                            </Button>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
             </div>
 
             {!productsLoading && filteredProducts.length === 0 && !error && (
               <div className="text-center py-12">
-                <p className="text-gray-500">No products found matching your criteria.</p>
+                <p className="text-gray-500">
+                  No products found matching your criteria.
+                </p>
               </div>
             )}
           </div>
