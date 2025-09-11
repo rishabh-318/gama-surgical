@@ -250,7 +250,7 @@ export default function ProductCatalog() {
                 </div>
                 <div>
                   <a
-                    href="/catalog/prodcatalog.pdf"
+                    href="/catalog/ProductCatelog.pdf"
                     download
                     className="w-full h-full flex items-center justify-center"
                   >

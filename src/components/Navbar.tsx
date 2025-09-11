@@ -84,7 +84,7 @@ const Navbar = () => {
         {/* Action Buttons - Hidden on small screens */}
         <div className="hidden lg:flex gap-2">
           <a
-            href="/catalog/prodcatalog.pdf"
+            href="/catalog/ProductCatelog.pdf"
             download
             className="w-full h-full flex items-center justify-center "
           >
@@ -193,7 +193,7 @@ const Navbar = () => {
               {/* Mobile action buttons */}
               <div className="flex flex-col gap-3 pt-4">
                 <a
-                  href="/catalog/prodcatalog.pdf"
+                  href="/catalog/ProductCatelog.pdf"
                   download
                   className="w-full h-full flex items-center justify-center "
                 >
