@@ -9,12 +9,14 @@ import {
 } from "lucide-react";
 import React from "react";
 import Button from "../ui/Button";
+import Link from "next/link";
 
 interface FeatureCardProps {
   icon: React.ReactNode;
   heading: string;
   subHeading: string;
   tags: string[];
+  id?: number;
 }
 
 const FeatureCard = (props: FeatureCardProps) => {
@@ -38,10 +40,13 @@ const FeatureCard = (props: FeatureCardProps) => {
             </span>
           ))}
         </div>
-        <button className="flex gap-2 text-[#FE5E0E] my-4 mt-5 text-sm items-center hover:gap-3 transition-all duration-200">
+        <Link
+          href={`/products`}
+          className="flex gap-2 text-[#FE5E0E] my-4 mt-5 text-sm items-center hover:gap-3 transition-all duration-200"
+        >
           View Products{" "}
           <ArrowRight className="text-sm" width={15} height={15} />
-        </button>
+        </Link>
       </div>
     </div>
   );
@@ -113,13 +118,15 @@ const FeatureSection = () => {
       </div>
 
       <div className="mt-8 sm:mt-10 lg:mt-16">
-        <Button
-          variant="secondary"
-          icon={<ArrowRight className="w-5 h-5" />}
-          className="flex flex-row-reverse hover:translate-0 text-white items-center px-6 py-3 text-sm sm:text-base"
-        >
-          View All Products
-        </Button>
+        <Link href="/products">
+          <Button
+            variant="secondary"
+            icon={<ArrowRight className="w-5 h-5" />}
+            className="flex flex-row-reverse hover:translate-0 text-white items-center px-6 py-3 mb-8 text-sm sm:text-base"
+          >
+            View All Products
+          </Button>
+        </Link>
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Button from "../ui/Button";
+import Link from "next/link";
 
 interface CardProps {
   icon: React.ElementType;
@@ -128,10 +129,12 @@ const Certification = () => {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 font-Inter">
-              <Button className="bg-[#FE5E0E] hover:bg-[#FE5E0E] shadow-sm text-sm flex items-center justify-center gap-2">
-                View All Certificates
-                <FileText className="w-4 h-4 text-white" />
-              </Button>
+              <Link href={`/certificate`}>
+                <Button className="bg-[#FE5E0E]  hover:bg-[#FE5E0E] shadow-sm text-sm flex items-center justify-center gap-2">
+                  View All Certificates
+                  <FileText className="w-4 h-4 text-white" />
+                </Button>
+              </Link>
               <Button className="bg-white hover:bg-white/90 shadow-sm text-black border border-gray-200">
                 Download Quality Policy
               </Button>

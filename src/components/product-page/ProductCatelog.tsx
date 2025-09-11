@@ -259,15 +259,15 @@ export default function ProductCatalog() {
                       )}
 
                       {/* Action Buttons */}
-                      <div className="flex gap-2 mt-3">
+                      <div className="flex lg:flex-wrap gap-2 mt-3">
                         <Button
-                          className="w-full bg-transparent hover:bg-transparent border border-[#DAE0E7] text-black"
+                          className="w-fit bg-transparent hover:bg-transparent border border-[#DAE0E7] text-black"
                           onClick={() => handleViewDetails(product)}
                         >
                           View Details
                         </Button>
                         <Button
-                          className="w-full border-[blue-500] text-white shadow-sm shadow-[#1D25301A] bg-[#FE5E0E] hover:bg-[#FE5E0E]"
+                          className="w-fit border-[blue-500] text-white shadow-sm shadow-[#1D25301A] bg-[#FE5E0E] hover:bg-[#FE5E0E]"
                           onClick={() =>
                             (window.location.href = "tel:+919484449452")
                           }

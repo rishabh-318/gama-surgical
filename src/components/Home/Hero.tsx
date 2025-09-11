@@ -5,6 +5,7 @@ import BadgeIcon from "../CustomIcons/BadgeIcon";
 import ShieldIcon from "../CustomIcons/ShieldIcon";
 import CuboidIcon from "../CustomIcons/CuboidIcon";
 import Button from "../ui/Button";
+import Link from "next/link";
 
 interface StatItemProps {
   number: string;
@@ -19,7 +20,7 @@ interface FeatureCardProps {
 
 // Extracted components with improved props
 const StatItem = ({ number, label }: StatItemProps) => (
-  <div className="text-center sm:text-start">
+  <div className="text-center sm:text-start flex flex-col justify-center items-center">
     <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2">
       {number}
     </div>
@@ -54,12 +55,12 @@ const certifications = [
 
 const Hero = () => {
   return (
-    <div className="font-Inter min-h-screen lg:h-[95vh] flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 pb-20 gap-8 sm:gap-16 sm:pt-20 bg-gradient-to-b from-[#1679CACF] to-[#0F69B3F2] relative">
-      <div className="flex flex-col gap-6 sm:gap-8 items-center w-full max-w-7xl mx-auto">
+    <div className="font-Inter min-h-screen  flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 pb-20 gap-8 sm:gap-16 sm:pt-20 bg-gradient-to-b from-[#1679CACF] to-[#0F69B3F2] relative">
+      <div className="flex flex-col gap-6 sm:gap-8 items-center w-full  max-w-7xl mx-auto">
         {/* Content Container */}
         <div className="relative z-10 w-full px-4 sm:px-6">
           {/* Header Certification Badge */}
-          <div className="flex items-center justify-center lg:justify-start mb-6">
+          <div className="flex items-center text-center justify-center lg:justify-start mb-6">
             <div className="flex items-center flex-wrap justify-center md:justify-start gap-2">
               <Shield className="text-white w-5 h-5 sm:w-6 sm:h-6" />
               <span className="text-white text-xs sm:text-sm font-medium bg-white/20 backdrop-blur-sm rounded-full px-3 sm:px-4 py-1.5 sm:py-2 border border-white/30">
@@ -91,23 +92,25 @@ const Hero = () => {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start items-center">
                 <Button
-                  className="bg-white text-[#1679CA] px-6 sm:px-8 py-3 rounded-lg font-semibold text-base sm:text-lg hover:bg-white/95 transition-all duration-300 flex items-center justify-center group"
+                  className="bg-white text-[#1679CA] px-6 sm:px-8 py-3 rounded-lg font-semibold text-base sm:text-lg hover:bg-white/95 transition-all duration-300 flex items-center justify-center w-fit group"
                   onClick={() => (window.location.href = "tel:+919484449452")}
                 >
                   Request a Sample
                   <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
 
-                <Button className="bg-[#FE5E0E] border border-white/60 text-white px-6 sm:px-8 py-3 rounded-lg font-semibold text-base sm:text-lg hover:bg-[#FE5E0E]/90 transition-all duration-300 flex items-center justify-center group">
-                  Explore Products
-                  <CuboidIcon />
-                </Button>
+                <Link href="/products">
+                  <Button className="bg-[#FE5E0E] border border-white/60 text-white px-6 sm:px-8 py-3 rounded-lg font-semibold text-base sm:text-lg hover:bg-[#FE5E0E]/90 transition-all duration-300 flex items-center justify-center group">
+                    Explore Products
+                    <CuboidIcon />
+                  </Button>
+                </Link>
               </div>
 
               {/* Statistics */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 py-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 py-4 mb-16">
                 <StatItem number="50+" label="Products" />
                 <StatItem number="1000+" label="Clients" />
                 <StatItem number="5+" label="Years" />
