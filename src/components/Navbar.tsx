@@ -67,6 +67,12 @@ const Navbar = () => {
             About
           </Link>
           <ProductDropdown />
+          <Link
+            href="/blogs"
+            className="text-black hover:text-blue-600 transition-colors"
+          >
+            Blogs
+          </Link>
 
           <Link
             href="/certificate"
@@ -181,6 +187,13 @@ const Navbar = () => {
                 Products
               </Link> */}
               <ProductDropdown />
+              <Link
+                href="/blogs"
+                className="block text-black hover:text-blue-600 transition-colors border-b border-gray-100"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Blogs
+              </Link>
               <Link
                 href="/certificate"
                 className="block  text-black hover:text-blue-600 transition-colors border-b border-gray-100"
