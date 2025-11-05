@@ -52,3 +52,35 @@ model Image {
 
   @@index([productId])
 }
+
+model Blog {
+  id         String      @id @default(auto()) @map("_id") @db.ObjectId
+  title      String
+  desc       String
+  author     String
+  readTime   Int?        @default(1) // start at 1 so you can increase/decrease
+  isFeature  Boolean     @default(false)
+  tags       String[]    // array of tags
+  images     BlogImage[] // relation to images
+  status     BlogStatus  @default(DRAFT)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  @@map("blogs")
+}
+
+model BlogImage {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  url       String
+  position  Int
+  blogId    String   @db.ObjectId
+  blog      Blog     @relation(fields: [blogId], references: [id], onDelete: Cascade)
+
+  @@map("blog_images")
+}
+
+enum BlogStatus {
+  DRAFT
+  PUBLISHED
+}
+
