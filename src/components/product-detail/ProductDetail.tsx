@@ -135,7 +135,7 @@ export default function ProductDetail() {
   const hasMultipleImages = images.length > 1;
 
   return (
-    <div className="min-h-screen bg-gray-50 p-10 pt-5">
+    <div className="min-h-screen bg-gray-50 p-4 md:p-10 pt-5">
       <Link href={`/products`} className="bg-amber-50">
         <Button
           className="my-4 hover:shadow-lg border-[0.5px] rounded-full p-4"
@@ -144,19 +144,20 @@ export default function ProductDetail() {
           <ArrowLeftIcon className="font-bold text-5xl text-black" />
         </Button>
       </Link>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
         {/* Images Carousel */}
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center w-full">
           <div className="relative w-full max-w-[500px]">
             {/* Main Image */}
-            <div className="relative w-full h-[500px]">
+            <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px]">
               <Image
                 src={
                   images[currentImageIndex]?.url || "/images/placeholder.png"
                 }
                 alt={`${product.name} - Image ${currentImageIndex + 1}`}
                 fill
-                className="rounded-lg object-cover"
+                className="rounded-lg object-contain"
+                priority
               />
             </div>
 
@@ -178,7 +179,7 @@ export default function ProductDetail() {
                       alt={`${product.name} - Thumbnail ${index + 1}`}
                       width={80}
                       height={80}
-                      className="object-cover"
+                      className="object-contain"
                     />
                   </button>
                 ))}
@@ -201,21 +202,21 @@ export default function ProductDetail() {
             </p>
 
             {/* Sterility and other tags */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 items-center">
               {product.sterility === Sterility.STERILE && (
-                <span className="text-[#21C45D] text-sm px-3 py-2 bg-[#21C45D1A] flex items-center justify-center rounded-lg">
-                  <Shield className="w-4 h-4 mr-1" /> Sterile
+                <span className="text-green-700 text-sm px-4 py-2 bg-green-50 border border-green-200 flex items-center justify-center rounded-full font-medium">
+                  <Shield className="w-4 h-4 mr-1.5" /> Sterile
                 </span>
               )}
               {product.sterility === Sterility.NON_STERILE && (
-                <span className="text-gray-600 text-sm px-3 py-2 bg-gray-100 flex items-center justify-center rounded-lg">
-                  Non-Sterile
+                <span className="text-red-700 text-sm px-4 py-2 bg-red-50 border border-red-200 flex items-center justify-center rounded-full font-medium">
+                  <Shield className="w-4 h-4 mr-1.5" /> Non-Sterile
                 </span>
               )}
               {product.categoryNames.map((category) => (
                 <span
                   key={category}
-                  className="text-sm bg-blue-100 text-blue-800 px-3 py-1 rounded-full"
+                  className="text-sm bg-blue-100 text-blue-800 px-4 py-2 rounded-full border border-blue-200 font-medium"
                 >
                   {category}
                 </span>
@@ -224,8 +225,8 @@ export default function ProductDetail() {
 
             {/* Size */}
             {product.size && (
-              <div>
-                <h3 className="font-medium text-gray-900 mb-1">Size:</h3>
+              <div className="flex items-center gap-2">
+                <h3 className="font-medium text-gray-900">Size:</h3>
                 <p className="text-sm text-gray-600">{product.size}</p>
               </div>
             )}
