@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { Sterility } from "@/types/product";
 import { useProduct } from "@/hooks/useProduct";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 
 // Product Detail Skeleton Component
 const ProductDetailSkeleton = () => (
@@ -58,6 +59,37 @@ export default function ProductDetail() {
   // Fetch product using the API hook
   const { data: product, isLoading, error } = useProduct(productSlug);
 
+  // State for image carousel
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Auto-change images every 3 seconds
+  useEffect(() => {
+    if (!product?.images || product.images.length <= 1) return;
+
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) =>
+        prev === product.images.length - 1 ? 0 : prev + 1
+      );
+    }, 6000); // Change every 6 seconds
+
+    return () => clearInterval(interval);
+  }, [product?.images]);
+
+  // Manual navigation functions
+  const goToPrevious = () => {
+    if (!product?.images) return;
+    setCurrentImageIndex((prev) =>
+      prev === 0 ? product.images.length - 1 : prev - 1
+    );
+  };
+
+  const goToNext = () => {
+    if (!product?.images) return;
+    setCurrentImageIndex((prev) =>
+      prev === product.images.length - 1 ? 0 : prev + 1
+    );
+  };
+
   // Show loading skeleton while fetching
   if (isLoading) {
     return <ProductDetailSkeleton />;
@@ -99,6 +131,9 @@ export default function ProductDetail() {
     );
   }
 
+  const images = product.images || [];
+  const hasMultipleImages = images.length > 1;
+
   return (
     <div className="min-h-screen bg-gray-50 p-10 pt-5">
       <Link href={`/products`} className="bg-amber-50">
@@ -109,32 +144,47 @@ export default function ProductDetail() {
           <ArrowLeftIcon className="font-bold text-5xl text-black" />
         </Button>
       </Link>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        {/* Images */}
-        <div>
-          <Image
-            src={product.images?.[0]?.url || "/images/placeholder.png"}
-            alt={product.name}
-            width={500}
-            height={500}
-            className="rounded-lg object-cover"
-          />
-
-          {/* Additional images if available */}
-          {product.images && product.images.length > 1 && (
-            <div className="flex gap-2 mt-4 overflow-x-auto">
-              {product.images.slice(1, 5).map((image, index) => (
-                <Image
-                  key={image.id}
-                  src={image.url}
-                  alt={`${product.name} - Image ${index + 2}`}
-                  width={100}
-                  height={100}
-                  className="rounded-md object-cover flex-shrink-0"
-                />
-              ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Images Carousel */}
+        <div className="flex flex-col items-center justify-center">
+          <div className="relative w-full max-w-[500px]">
+            {/* Main Image */}
+            <div className="relative w-full h-[500px]">
+              <Image
+                src={
+                  images[currentImageIndex]?.url || "/images/placeholder.png"
+                }
+                alt={`${product.name} - Image ${currentImageIndex + 1}`}
+                fill
+                className="rounded-lg object-cover"
+              />
             </div>
-          )}
+
+            {/* Thumbnail Navigation */}
+            {hasMultipleImages && (
+              <div className="flex gap-2 mt-4 overflow-x-auto pb-2">
+                {images.map((image, index) => (
+                  <button
+                    key={image.id}
+                    onClick={() => setCurrentImageIndex(index)}
+                    className={`relative flex-shrink-0 rounded-md overflow-hidden object-cover aspect-square transition-all ${
+                      index === currentImageIndex
+                        ? "border-2 border-[#FE5E0E] opacity-100"
+                        : "opacity-60 hover:opacity-100 border-2 border-transparent"
+                    }`}
+                  >
+                    <Image
+                      src={image.url}
+                      alt={`${product.name} - Thumbnail ${index + 1}`}
+                      width={80}
+                      height={80}
+                      className="object-cover"
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Info */}
@@ -194,10 +244,7 @@ export default function ProductDetail() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button
-                  className="bg-[#FE5E0E] text-white hover:bg-[#E5530C] px-6 py-3"
-                  // onClick={() => (window.location.href = "tel:+919484449452")}
-                >
+                <Button className="bg-[#FE5E0E] text-white hover:bg-[#E5530C] px-6 py-3">
                   <ShoppingCart className="w-5 h-5 mr-2" />
                   Request Sample
                 </Button>

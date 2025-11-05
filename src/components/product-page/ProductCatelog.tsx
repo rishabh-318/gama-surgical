@@ -140,7 +140,7 @@ export default function ProductCatalog() {
         </p>
       </div>
 
-      <div className="container mx-auto px-10 py-8">
+      <div className="mx-auto px-10 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar Filters */}
           <aside className="lg:w-fit space-y-6">
@@ -282,7 +282,7 @@ export default function ProductCatalog() {
                       key={product.id}
                       className="group shadow rounded-lg border-[#DAE0E7] overflow-hidden"
                     >
-                      <CardContent className="p-4 space-y-3">
+                      <CardContent className="p-4 flex flex-col h-full">
                         <div className="bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center">
                           <Image
                             src={
@@ -296,7 +296,7 @@ export default function ProductCatalog() {
                           />
                         </div>
 
-                        <div className="space-y-2">
+                        <div className="flex flex-col flex-grow space-y-2 mt-3">
                           <h3 className="font-semibold text-[1rem] text-gray-900 line-clamp-2">
                             {product.name}
                           </h3>
@@ -306,9 +306,13 @@ export default function ProductCatalog() {
 
                           {/* Tags */}
                           <div className="flex flex-wrap gap-2 mt-1">
-                            {product.sterility === Sterility.STERILE && (
+                            {product.sterility === Sterility.STERILE ? (
                               <span className="text-[#21C45D] text-xs p-2 bg-[#21C45D1A] flex items-center justify-center rounded-lg">
                                 <Shield className="w-3 h-3" /> Sterile
+                              </span>
+                            ) : (
+                              <span className="text-red-800 text-xs p-2 bg-red-500/30 flex items-center justify-center rounded-lg">
+                                <Shield className="w-3 h-3" /> Non-Sterile
                               </span>
                             )}
                             {product.categoryNames?.map((category) => (
@@ -329,7 +333,7 @@ export default function ProductCatalog() {
                           )}
 
                           {/* Action Buttons */}
-                          <div className="flex gap-2 mt-3">
+                          <div className="flex flex-wrap items-center justify-center gap-2 mt-auto">
                             <Link href={`/products/${product.slug}`}>
                               <Button className="w-full bg-transparent hover:bg-transparent border border-[#DAE0E7] text-black">
                                 View Details

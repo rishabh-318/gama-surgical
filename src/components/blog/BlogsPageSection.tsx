@@ -45,7 +45,7 @@ const BlogsPageSection = () => {
       const response = await fetch("/api/blogs?limit=12");
 
       console.log("API Response status:", response.status);
-      
+
       if (!response.ok) {
         const errorText = await response.text();
         console.error("API Error:", errorText);
@@ -101,7 +101,8 @@ const BlogsPageSection = () => {
             {error ? "Error Loading Blogs" : "No Blogs Yet"}
           </h3>
           <p className="text-gray-600 text-base">
-            {error?.message || "We haven't published any blog posts yet. Check back soon for exciting content!"}
+            {error?.message ||
+              "We haven't published any blog posts yet. Check back soon for exciting content!"}
           </p>
         </div>
       </div>
@@ -118,7 +119,7 @@ const BlogsPageSection = () => {
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12  py-12">
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12  pb-12">
         {/* <div className="flex flex-col sm:flex-row justify-end items-start sm:items-center gap-4 mb-8">
           <div className="flex items-center gap-3">
             <span className="text-sm text-gray-700 font-medium flex items-center gap-2">
