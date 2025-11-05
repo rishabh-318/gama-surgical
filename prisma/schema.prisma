@@ -84,3 +84,23 @@ enum BlogStatus {
   PUBLISHED
 }
 
+// CONTACT INQUIRY MODEL
+model ContactInquiry {
+  id               String        @id @default(auto()) @map("_id") @db.ObjectId
+  organizationName String
+  personName       String
+  phone            String
+  email            String
+  requirement      String
+  status           InquiryStatus @default(PENDING)
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  @@map("contact_inquiries")
+}
+
+enum InquiryStatus {
+  PENDING
+  RESOLVED
+  REJECTED
+}

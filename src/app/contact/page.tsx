@@ -15,6 +15,9 @@ export default function ContactMe() {
     email: "",
     requirements: "",
   });
+  
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState("");
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -26,18 +29,46 @@ export default function ContactMe() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
-    setFormData({
-      companyName: "",
-      contactPerson: "",
-      phone: "",
-      email: "",
-      requirements: "",
-    });
-    // You can add API call or form validation logic here
+    setIsSubmitting(true);
+    setSubmitMessage("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          organizationName: formData.companyName,
+          personName: formData.contactPerson,
+          phone: formData.phone,
+          email: formData.email,
+          requirement: formData.requirements,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitMessage("✅ Your inquiry has been submitted successfully!");
+        setFormData({
+          companyName: "",
+          contactPerson: "",
+          phone: "",
+          email: "",
+          requirements: "",
+        });
+      } else {
+        setSubmitMessage("❌ " + (data.error || "Failed to submit inquiry"));
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setSubmitMessage("❌ An error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -57,7 +88,7 @@ export default function ContactMe() {
           <div className="grid md:grid-cols-2 gap-12">
             {/* Send Enquiry Form */}
             <div>
-              <h2 className="text-2xl font-semibold text-[#22282A] border border-[#E8ECEE] mb-6">
+              <h2 className="text-2xl font-semibold text-[#22282A] mb-6">
                 Send Enquiry
               </h2>
 
@@ -132,11 +163,24 @@ export default function ContactMe() {
                   />
                 </div>
 
+                {submitMessage && (
+                  <div
+                    className={`p-3 rounded-md ${
+                      submitMessage.startsWith("✅")
+                        ? "bg-green-50 text-green-800 border border-green-200"
+                        : "bg-red-50 text-red-800 border border-red-200"
+                    }`}
+                  >
+                    {submitMessage}
+                  </div>
+                )}
+
                 <Button
                   type="submit"
-                  className="w-full bg-[#f97316] hover:bg-[#ea580c] text-white font-medium py-3"
+                  disabled={isSubmitting}
+                  className="w-full bg-[#f97316] hover:bg-[#ea580c] text-white font-medium py-3 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Submit Enquiry
+                  {isSubmitting ? "Submitting..." : "Submit Enquiry"}
                 </Button>
               </form>
             </div>
