@@ -346,9 +346,9 @@ export default function ProductCatalog() {
                             >
                               <Button
                                 className="w-full border-[blue-500] text-white shadow-sm shadow-[#1D25301A] bg-[#FE5E0E] hover:bg-[#FE5E0E]"
-                                onClick={() =>
-                                  (window.location.href = "tel:+919484449452")
-                                }
+                                // onClick={() =>
+                                //   (window.location.href = "tel:+919484449452")
+                                // }
                               >
                                 Request Sample
                               </Button>
