@@ -198,7 +198,7 @@ export function LeftContact({ downloadCatelog } = { downloadCatelog: false }) {
                 className="border border-[#DAE0E7] text-sm w-full justify-center"
                 icon={<DocumentIcon />}
               >
-                Download Catalog
+                Get Free Catalog
               </Button>
             </a>
           )}
