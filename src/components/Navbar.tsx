@@ -23,6 +23,14 @@ const Navbar = () => {
           <p className="flex gap-2 items-center">
             <Phone className="w-4 h-4" /> +91 99789 74208
           </p>
+            <Link
+            href="mailto:info@gamasurgical.in"
+            target="_blank"
+            className="flex gap-2 items-center"
+          >
+            <Mail className="w-4 h-4" />
+            info@gamasurgical.in
+          </Link>
         </div>
         <div>
           <p>ISO 9001:2015 & ISO 13485:2016 Certified</p>
