@@ -9,7 +9,7 @@ import { Checkbox } from "@/components/ui/Checkbox";
 import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Product, Sterility } from "@/types/product";
+import { Sterility } from "@/types/product";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useCategories } from "@/hooks/useCategories";
 import { useProducts } from "@/hooks/useProduct";
@@ -347,7 +347,7 @@ export default function ProductCatalog() {
                               <Button
                                 className="w-full border-[blue-500] text-white shadow-sm shadow-[#1D25301A] bg-[#FE5E0E] hover:bg-[#FE5E0E]"
                                 onClick={() =>
-                                  (window.location.href = "tel:+919484449452")
+                                  (window.location.href = "tel:+919978974208")
                                 }
                               >
                                 Request Sample

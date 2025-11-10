@@ -21,16 +21,8 @@ const Navbar = () => {
       <div className="hidden md:flex items-center justify-between px-4 sm:px-8 lg:px-12 text-[#1679CA] h-10 bg-[#DBECFA] border border-[#DAE0E7] text-xs lg:text-sm">
         <div className="flex items-center justify-between gap-4">
           <p className="flex gap-2 items-center">
-            <Phone className="w-4 h-4" /> +91 98765 43210
+            <Phone className="w-4 h-4" /> +91 99789 74208
           </p>
-          <Link
-            href="mailto:info@gamasurgical.in"
-            target="_blank"
-            className="flex gap-2 items-center"
-          >
-            <Mail className="w-4 h-4" />
-            info@gamasurgical.in
-          </Link>
         </div>
         <div>
           <p>ISO 9001:2015 & ISO 13485:2016 Certified</p>
@@ -246,7 +238,7 @@ const Navbar = () => {
               <div className="pt-6 border-t border-gray-200 space-y-3">
                 <div className="flex items-center gap-3 text-sm text-[#1679CA]">
                   <Phone className="w-4 h-4" />
-                  <span>+91 98765 43210</span>
+                  <span>+91 99789 74208</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-[#1679CA]">
                   <Mail className="w-4 h-4" />
@@ -269,8 +261,7 @@ function ProductDropdown() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const { data: categoriesData, isLoading: categoriesLoading } =
-    useCategories();
+  const { data: categoriesData } = useCategories();
   // Create categories list including "All Products"
   const categories = useMemo(() => {
     const allCategories = ["All Products"];
