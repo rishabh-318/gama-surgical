@@ -283,7 +283,10 @@ export default function ProductCatalog() {
                       className="group shadow rounded-lg border-[#DAE0E7] overflow-hidden"
                     >
                       <CardContent className="p-4 flex flex-col h-full">
-                        <div className="bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center">
+                        <Link
+                          href={`/products/${product.slug}`}
+                          className="bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center"
+                        >
                           <Image
                             src={
                               product.images?.[0]?.url ||
@@ -294,7 +297,7 @@ export default function ProductCatalog() {
                             height={250}
                             className="object-cover group-hover:scale-105 transition-transform duration-200 aspect-square"
                           />
-                        </div>
+                        </Link>
 
                         <div className="flex flex-col flex-grow space-y-2 mt-3">
                           <h3 className="font-semibold text-[1rem] text-gray-900 line-clamp-2">
