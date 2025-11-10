@@ -9,7 +9,7 @@ import { Checkbox } from "@/components/ui/Checkbox";
 import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Product, Sterility } from "@/types/product";
+import { Sterility } from "@/types/product";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useCategories } from "@/hooks/useCategories";
 import { useProducts } from "@/hooks/useProduct";

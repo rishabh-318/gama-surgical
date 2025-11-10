@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
-import { ChevronDown, FileText, Download, Send } from "lucide-react";
-import { LeftContact } from "@/app/contact/page";
+import LeftContact from "@/components/contact/LeftContact";
+// import React, { useState } from "react";
+import { FileText, Download, Send } from "lucide-react";
 
 const ContactGama = () => {
   // const [formData, setFormData] = useState({

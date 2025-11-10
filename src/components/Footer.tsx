@@ -15,6 +15,7 @@ import Link from "next/link";
 import Button from "./ui/Button";
 import { useCategories } from "@/hooks/useCategories";
 import { useRouter } from "next/navigation";
+import { Skeleton } from "./ui/skeleton";
 
 const Footer = () => {
   const [userMail, setUserMail] = useState<string>("");
@@ -126,18 +127,29 @@ const Footer = () => {
           </h4>
 
           <ul className="text-[#52637A] flex flex-col gap-4 text-sm list-none">
-            {[...categories]
-              .filter((c) => c !== "Others") // take all except Others
-              .concat("Others") // add Others at the end
-              .map((category, index) => (
-                <li
-                  key={index}
-                  onClick={() => handleCategorySelect(category)}
-                  className="hover:text-[#FE5E0E] transition-colors cursor-pointer"
-                >
-                  {category}
-                </li>
-              ))}
+            {categoriesLoading ? (
+              <div className="space-y-4">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="flex items-center space-x-2">
+                    <Skeleton className="h-4 w-4" />
+                    <Skeleton className="h-4 w-24" />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              [...categories]
+                .filter((c) => c !== "Others") // take all except Others
+                .concat("Others") // add Others at the end
+                .map((category, index) => (
+                  <li
+                    key={index}
+                    onClick={() => handleCategorySelect(category)}
+                    className="hover:text-[#FE5E0E] transition-colors cursor-pointer"
+                  >
+                    {category}
+                  </li>
+                ))
+            )}
           </ul>
         </div>
 

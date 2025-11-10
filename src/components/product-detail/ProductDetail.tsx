@@ -76,19 +76,19 @@ export default function ProductDetail() {
   }, [product?.images]);
 
   // Manual navigation functions
-  const goToPrevious = () => {
-    if (!product?.images) return;
-    setCurrentImageIndex((prev) =>
-      prev === 0 ? product.images.length - 1 : prev - 1
-    );
-  };
+  // const goToPrevious = () => {
+  //   if (!product?.images) return;
+  //   setCurrentImageIndex((prev) =>
+  //     prev === 0 ? product.images.length - 1 : prev - 1
+  //   );
+  // };
 
-  const goToNext = () => {
-    if (!product?.images) return;
-    setCurrentImageIndex((prev) =>
-      prev === product.images.length - 1 ? 0 : prev + 1
-    );
-  };
+  // const goToNext = () => {
+  //   if (!product?.images) return;
+  //   setCurrentImageIndex((prev) =>
+  //     prev === product.images.length - 1 ? 0 : prev + 1
+  //   );
+  // };
 
   // Show loading skeleton while fetching
   if (isLoading) {

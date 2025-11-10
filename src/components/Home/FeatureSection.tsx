@@ -1,5 +1,5 @@
 "use client";
-import { LucideIcon, Package } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 import * as Icons from "lucide-react";
 import React from "react";
 import Button from "../ui/Button";
@@ -14,7 +14,7 @@ interface FeatureCardProps {
 const FeatureCard = ({ category }: FeatureCardProps) => {
   const getIcon = (iconName: string | null | undefined): LucideIcon => {
     if (!iconName) return Icons.Package;
-
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const IconComponent = (Icons as any)[iconName];
     return IconComponent || Icons.Package;
   };

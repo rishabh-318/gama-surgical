@@ -1,5 +1,4 @@
 const AboutPartners = () => {
-  const tags = ["Retail License", "Daily Deliveries", "5000 sq ft Facility"];
   const partners = [
     {
       name: "Touch Safe Surgical – Surat",

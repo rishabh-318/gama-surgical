@@ -11,6 +11,7 @@ import { useCategories } from "@/hooks/useCategories";
 // import { useRouter } from "next/router";
 
 import { usePathname, useRouter } from "next/navigation";
+import { Skeleton } from "./ui/skeleton";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -374,18 +375,29 @@ function ProductDropdown() {
         <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide border-b border-gray-100">
           Categories
         </div>
-        {[...categories]
-          .filter((c) => c !== "Others")
-          .concat("Others")
-          .map((category, index) => (
-            <button
-              key={index}
-              onClick={() => handleCategorySelect(category)}
-              className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150"
-            >
-              {category}
-            </button>
-          ))}
+        {categoriesLoading ? (
+          <div className="space-y-4">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="flex items-center space-x-2">
+                <Skeleton className="h-4 w-4" />
+                <Skeleton className="h-4 w-24" />
+              </div>
+            ))}
+          </div>
+        ) : (
+          [...categories]
+            .filter((c) => c !== "Others")
+            .concat("Others")
+            .map((category, index) => (
+              <button
+                key={index}
+                onClick={() => handleCategorySelect(category)}
+                className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150"
+              >
+                {category}
+              </button>
+            ))
+        )}
       </div>
     </div>
   );
