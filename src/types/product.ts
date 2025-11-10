@@ -15,6 +15,9 @@ export interface Image {
 export interface Category {
   id: string;
   name: string;
+  description?: string;
+  icon?: string;
+  tags?: string[];
   createdAt: Date;
   updatedAt: Date;
 }
