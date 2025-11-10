@@ -1,53 +1,54 @@
 "use client";
 import React, { useState } from "react";
 import { ChevronDown, FileText, Download, Send } from "lucide-react";
+import { LeftContact } from "@/app/contact/page";
 
 const ContactGama = () => {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    organization: "",
-    email: "",
-    phone: "",
-    region: "",
-    categories: {
-      dressings: false,
-      drapes: false,
-      catheters: false,
-      plasters: false,
-      gloves: false,
-      wipes: false,
-      others: false,
-    },
-    requirements: "",
-    agreeToComms: false,
-  });
+  // const [formData, setFormData] = useState({
+  //   fullName: "",
+  //   organization: "",
+  //   email: "",
+  //   phone: "",
+  //   region: "",
+  //   categories: {
+  //     dressings: false,
+  //     drapes: false,
+  //     catheters: false,
+  //     plasters: false,
+  //     gloves: false,
+  //     wipes: false,
+  //     others: false,
+  //   },
+  //   requirements: "",
+  //   agreeToComms: false,
+  // });
 
-  const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { name, value, type } = e.target;
-    if (type === "checkbox") {
-      const checked = (e.target as HTMLInputElement).checked;
-      if (name.startsWith("categories.")) {
-        const category = name.split(".")[1];
-        setFormData((prev) => ({
-          ...prev,
-          categories: { ...prev.categories, [category]: checked },
-        }));
-      } else {
-        setFormData((prev) => ({ ...prev, [name]: checked }));
-      }
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-    }
-  };
+  // const handleInputChange = (
+  //   e: React.ChangeEvent<
+  //     HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+  //   >
+  // ) => {
+  //   const { name, value, type } = e.target;
+  //   if (type === "checkbox") {
+  //     const checked = (e.target as HTMLInputElement).checked;
+  //     if (name.startsWith("categories.")) {
+  //       const category = name.split(".")[1];
+  //       setFormData((prev) => ({
+  //         ...prev,
+  //         categories: { ...prev.categories, [category]: checked },
+  //       }));
+  //     } else {
+  //       setFormData((prev) => ({ ...prev, [name]: checked }));
+  //     }
+  //   } else {
+  //     setFormData((prev) => ({ ...prev, [name]: value }));
+  //   }
+  // };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-  };
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   console.log("Form submitted:", formData);
+  // };
 
   return (
     <div className="min-h-screen bg-[#FCFDFD] p-4 sm:p-6 w-full flex justify-center items-center">
@@ -64,8 +65,7 @@ const ContactGama = () => {
                 catalog
               </p>
 
-              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-                {/* Name and Organization Row */}
+              {/* <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -97,7 +97,6 @@ const ContactGama = () => {
                   </div>
                 </div>
 
-                {/* Email and Phone Row */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -129,7 +128,6 @@ const ContactGama = () => {
                   </div>
                 </div>
 
-                {/* Region/Country */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Region/Country *
@@ -153,7 +151,6 @@ const ContactGama = () => {
                   </div>
                 </div>
 
-                {/* Interested Product Categories */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-3 sm:mb-4">
                     Interested Product Categories
@@ -248,7 +245,6 @@ const ContactGama = () => {
                   </div>
                 </div>
 
-                {/* Additional Requirements */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Additional Requirements
@@ -263,7 +259,6 @@ const ContactGama = () => {
                   />
                 </div>
 
-                {/* Agreement Checkbox */}
                 <div>
                   <label className="flex items-start space-x-3 cursor-pointer">
                     <input
@@ -282,7 +277,6 @@ const ContactGama = () => {
                   </label>
                 </div>
 
-                {/* Submit Button */}
                 <button
                   type="submit"
                   className="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg transition duration-200 flex items-center justify-center space-x-2 text-sm sm:text-base"
@@ -290,7 +284,8 @@ const ContactGama = () => {
                   <span>Get Free Catalog</span>
                   <Send className="w-4 h-4" />
                 </button>
-              </form>
+              </form> */}
+              <LeftContact downloadCatelog={true} />
             </div>
           </div>
 
