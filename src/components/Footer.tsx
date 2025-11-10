@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Input } from "./ui/input";
 import Image from "next/image";
 import {
@@ -13,9 +13,32 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Button from "./ui/Button";
+import { useCategories } from "@/hooks/useCategories";
+import { useRouter } from "next/navigation";
 
 const Footer = () => {
   const [userMail, setUserMail] = useState<string>("");
+  const router = useRouter();
+  const { data: categoriesData, isLoading: categoriesLoading } =
+    useCategories();
+  // Create categories list including "All Products"
+  const categories = useMemo(() => {
+    const allCategories = ["All Products"];
+    if (categoriesData) {
+      allCategories.push(...categoriesData.map((cat) => cat.name));
+    }
+    return allCategories;
+  }, [categoriesData]);
+  const handleCategorySelect = (category: string) => {
+    // If "All Products" is selected, navigate to products without query params
+    if (category === "All Products") {
+      router.push("/products");
+    } else {
+      // Navigate to products page with category filter
+      // Use encodeURIComponent to handle special characters in category names
+      router.push(`/products?category=${encodeURIComponent(category)}`);
+    }
+  };
   return (
     <footer className="bg-[#F3F5F7] pb-8">
       {/* Newsletter Section */}
@@ -101,28 +124,20 @@ const Footer = () => {
           <h4 className="text-black font-bold text-[1rem] mb-4">
             Product Categories
           </h4>
+
           <ul className="text-[#52637A] flex flex-col gap-4 text-sm list-none">
-            <li className="hover:text-[#FE5E0E] transition-colors cursor-pointer">
-              Dressings & Bandages
-            </li>
-            <li className="hover:text-[#FE5E0E] transition-colors cursor-pointer">
-              Plasters & Tapes
-            </li>
-            <li className="hover:text-[#FE5E0E] transition-colors cursor-pointer">
-              Drapes & Gowns
-            </li>
-            <li className="hover:text-[#FE5E0E] transition-colors cursor-pointer">
-              Gloves & Masks
-            </li>
-            <li className="hover:text-[#FE5E0E] transition-colors cursor-pointer">
-              Catheters & Tubes
-            </li>
-            <li className="hover:text-[#FE5E0E] transition-colors cursor-pointer">
-              Wipes & Cleaning
-            </li>
-            <li className="hover:text-[#FE5E0E] transition-colors cursor-pointer">
-              Others
-            </li>
+            {[...categories]
+              .filter((c) => c !== "Others") // take all except Others
+              .concat("Others") // add Others at the end
+              .map((category, index) => (
+                <li
+                  key={index}
+                  onClick={() => handleCategorySelect(category)}
+                  className="hover:text-[#FE5E0E] transition-colors cursor-pointer"
+                >
+                  {category}
+                </li>
+              ))}
           </ul>
         </div>
 
@@ -154,17 +169,17 @@ const Footer = () => {
             </li>
             <li className="flex items-center justify-start gap-4 mb-2">
               <Phone className="text-[#FE5E0E] flex-shrink-0" />
-              <p>+91 98765 43210</p>
+              <p>+91 9978974208</p>
             </li>
             <li className="flex  justify-start gap-4 mb-2 items-center">
               <Mail className="text-[#FE5E0E] flex-shrink-0 mt-1" />
               <div className="flex flex-col">
-                <Link
+                {/* <Link
                   href="mailto:gamasurgicalrjdoffice@gmail.com"
                   target="_blank"
                 >
                   gamasurgicalrjdoffice@gmail.com
-                </Link>
+                </Link> */}
                 <Link href="mailto:info.gamasurgical@gmail.com" target="_blank">
                   info.gamasurgical@gmail.com
                 </Link>

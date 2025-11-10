@@ -15,7 +15,7 @@ export default function ContactMe() {
     email: "",
     requirements: "",
   });
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
 
@@ -198,7 +198,7 @@ export default function ContactMe() {
                   </div>
                   <div>
                     <p className="font-medium text-foreground">
-                      Sales: +91 98765 43210
+                      Sales: +91 9978974208
                     </p>
                     <p className="text-sm text-muted-foreground">
                       Mon-Sat, 9AM-6PM
@@ -353,7 +353,7 @@ export default function ContactMe() {
                 Contact Info
               </h4>
               <div className="space-y-2 text-sm text-muted-foreground">
-                <p>+91 98765 43210</p>
+                <p>+91 98765 43210 / +91 9978974208</p>
                 <Link href="mailto:info@gamasurgical.in" target="_blank">
                   info@gamasurgical.in
                 </Link>

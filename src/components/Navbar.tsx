@@ -21,7 +21,7 @@ const Navbar = () => {
       <div className="hidden md:flex items-center justify-between px-4 sm:px-8 lg:px-12 text-[#1679CA] h-10 bg-[#DBECFA] border border-[#DAE0E7] text-xs lg:text-sm">
         <div className="flex items-center justify-between gap-4">
           <p className="flex gap-2 items-center">
-            <Phone className="w-4 h-4" /> +91 98765 43210
+            <Phone className="w-4 h-4" /> +91 9978974208
           </p>
           <Link
             href="mailto:info@gamasurgical.in"
@@ -246,7 +246,7 @@ const Navbar = () => {
               <div className="pt-6 border-t border-gray-200 space-y-3">
                 <div className="flex items-center gap-3 text-sm text-[#1679CA]">
                   <Phone className="w-4 h-4" />
-                  <span>+91 98765 43210</span>
+                  <span>+91 9978974208</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-[#1679CA]">
                   <Mail className="w-4 h-4" />
@@ -271,6 +271,7 @@ function ProductDropdown() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { data: categoriesData, isLoading: categoriesLoading } =
     useCategories();
+
   // Create categories list including "All Products"
   const categories = useMemo(() => {
     const allCategories = ["All Products"];
@@ -279,7 +280,7 @@ function ProductDropdown() {
     }
     return allCategories;
   }, [categoriesData]);
-  console.log(categories);
+
   // Handle clicking on "Products" text - direct navigation
   const handleProductsClick = () => {
     setIsOpen(false);
@@ -293,11 +294,18 @@ function ProductDropdown() {
     setIsOpen(!isOpen);
   };
 
-  // Handle category selection
+  // Handle category selection - FIXED VERSION
   const handleCategorySelect = (category: string) => {
     setIsOpen(false);
-    // Navigate to products page with category filter
-    router.push(`/products?category=${category}`);
+
+    // If "All Products" is selected, navigate to products without query params
+    if (category === "All Products") {
+      router.push("/products");
+    } else {
+      // Navigate to products page with category filter
+      // Use encodeURIComponent to handle special characters in category names
+      router.push(`/products?category=${encodeURIComponent(category)}`);
+    }
   };
 
   // Close dropdown when clicking outside
@@ -328,7 +336,7 @@ function ProductDropdown() {
         {/* Products text - clickable for direct navigation */}
         <button
           onClick={handleProductsClick}
-          className="text-black cursor-pointer hover:text-blue-600  font-medium transition-colors duration-200"
+          className="text-black cursor-pointer hover:text-blue-600 font-medium transition-colors duration-200"
         >
           Products
         </button>
@@ -340,7 +348,9 @@ function ProductDropdown() {
           aria-label="Toggle products menu"
         >
           <svg
-            className={`w-4 h-4 transform group-hover:rotate-180 transition-transform duration-200 `}
+            className={`w-4 h-4 transform transition-transform duration-200 ${
+              isOpen ? "rotate-180" : ""
+            }`}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -356,14 +366,17 @@ function ProductDropdown() {
       </div>
 
       {/* Dropdown menu */}
-
-      <div className="absolute top-full left-0 w-54 bg-white rounded-md shadow-lg border border-gray-200 py-2 z-50 hidden group-hover:block cursor-pointer">
+      <div
+        className={`absolute top-full left-0 w-54 bg-white rounded-md shadow-lg border border-gray-200 py-2 z-50 transition-opacity duration-200 ${
+          isOpen ? "block" : "hidden"
+        } group-hover:block cursor-pointer`}
+      >
         <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide border-b border-gray-100">
           Categories
         </div>
         {[...categories]
-          .filter((c) => c !== "Others") // take all except Others
-          .concat("Others") // add Others at the end
+          .filter((c) => c !== "Others")
+          .concat("Others")
           .map((category, index) => (
             <button
               key={index}
