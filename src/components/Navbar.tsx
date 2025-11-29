@@ -15,7 +15,143 @@ import { Skeleton } from "./ui/skeleton";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  function ProductDropdown() {
+    const router = useRouter();
+    const pathname = usePathname();
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+    const { data: categoriesData, isLoading: categoriesLoading } =
+      useCategories();
 
+    // Create categories list including "All Products"
+    const categories = useMemo(() => {
+      const allCategories = ["All Products"];
+      if (categoriesData) {
+        allCategories.push(...categoriesData.map((cat) => cat.name));
+      }
+      return allCategories;
+    }, [categoriesData]);
+
+    // Handle clicking on "Products" text - direct navigation
+    const handleProductsClick = () => {
+      setIsOpen(false);
+      router.push("/products");
+    };
+
+    // Handle dropdown toggle
+    const handleDropdownToggle = (e: React.MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setIsOpen(!isOpen);
+    };
+
+    // Handle category selection - FIXED VERSION
+    const handleCategorySelect = (category: string) => {
+      setIsOpen(false);
+      setIsMenuOpen(false);
+      // If "All Products" is selected, navigate to products without query params
+      if (category === "All Products") {
+        router.push("/products");
+      } else {
+        // Navigate to products page with category filter
+        // Use encodeURIComponent to handle special characters in category names
+        router.push(`/products?category=${encodeURIComponent(category)}`);
+      }
+    };
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+      const handleClickOutside = (event: MouseEvent) => {
+        if (
+          dropdownRef.current &&
+          !dropdownRef.current.contains(event.target as Node)
+        ) {
+          setIsOpen(false);
+        }
+      };
+
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, []);
+
+    // Close dropdown on route change
+    useEffect(() => {
+      setIsOpen(false);
+    }, [pathname]);
+
+    return (
+      <div className="relative group cursor-pointer" ref={dropdownRef}>
+        <div className="flex items-center cursor-pointer">
+          {/* Products text - clickable for direct navigation */}
+          <button
+            onClick={handleProductsClick}
+            className="text-black cursor-pointer hover:text-blue-600 font-medium transition-colors duration-200"
+          >
+            Products
+          </button>
+
+          {/* Dropdown arrow - clickable for dropdown toggle */}
+          <button
+            onClick={handleDropdownToggle}
+            className="ml-1 p-1 text-gray-500 cursor-pointer hover:text-blue-600 transition-colors duration-200"
+            aria-label="Toggle products menu"
+          >
+            <svg
+              className={`w-4 h-4 transform transition-transform duration-200 ${
+                isOpen ? "rotate-180" : ""
+              }`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Dropdown menu */}
+        <div
+          className={`absolute top-full left-0 w-54 bg-white rounded-md shadow-lg border border-gray-200 py-2 z-50 transition-opacity duration-200 ${
+            isOpen ? "block" : "hidden"
+          } group-hover:block cursor-pointer`}
+        >
+          <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide border-b border-gray-100">
+            Categories
+          </div>
+          {categoriesLoading ? (
+            <div className="space-y-4">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="flex items-center space-x-2">
+                  <Skeleton className="h-4 w-4" />
+                  <Skeleton className="h-4 w-24" />
+                </div>
+              ))}
+            </div>
+          ) : (
+            [...categories]
+              .filter((c) => c !== "Others")
+              .concat("Others")
+              .map((category, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleCategorySelect(category)}
+                  className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150"
+                >
+                  {category}
+                </button>
+              ))
+          )}
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="shadow-sm">
       {/* Top Bar */}
@@ -264,143 +400,5 @@ const Navbar = () => {
     </div>
   );
 };
-
-function ProductDropdown() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const { data: categoriesData, isLoading: categoriesLoading } =
-    useCategories();
-
-  // Create categories list including "All Products"
-  const categories = useMemo(() => {
-    const allCategories = ["All Products"];
-    if (categoriesData) {
-      allCategories.push(...categoriesData.map((cat) => cat.name));
-    }
-    return allCategories;
-  }, [categoriesData]);
-
-  // Handle clicking on "Products" text - direct navigation
-  const handleProductsClick = () => {
-    setIsOpen(false);
-    router.push("/products");
-  };
-
-  // Handle dropdown toggle
-  const handleDropdownToggle = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsOpen(!isOpen);
-  };
-
-  // Handle category selection - FIXED VERSION
-  const handleCategorySelect = (category: string) => {
-    setIsOpen(false);
-
-    // If "All Products" is selected, navigate to products without query params
-    if (category === "All Products") {
-      router.push("/products");
-    } else {
-      // Navigate to products page with category filter
-      // Use encodeURIComponent to handle special characters in category names
-      router.push(`/products?category=${encodeURIComponent(category)}`);
-    }
-  };
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  // Close dropdown on route change
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
-
-  return (
-    <div className="relative group cursor-pointer" ref={dropdownRef}>
-      <div className="flex items-center cursor-pointer">
-        {/* Products text - clickable for direct navigation */}
-        <button
-          onClick={handleProductsClick}
-          className="text-black cursor-pointer hover:text-blue-600 font-medium transition-colors duration-200"
-        >
-          Products
-        </button>
-
-        {/* Dropdown arrow - clickable for dropdown toggle */}
-        <button
-          onClick={handleDropdownToggle}
-          className="ml-1 p-1 text-gray-500 cursor-pointer hover:text-blue-600 transition-colors duration-200"
-          aria-label="Toggle products menu"
-        >
-          <svg
-            className={`w-4 h-4 transform transition-transform duration-200 ${
-              isOpen ? "rotate-180" : ""
-            }`}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
-        </button>
-      </div>
-
-      {/* Dropdown menu */}
-      <div
-        className={`absolute top-full left-0 w-54 bg-white rounded-md shadow-lg border border-gray-200 py-2 z-50 transition-opacity duration-200 ${
-          isOpen ? "block" : "hidden"
-        } group-hover:block cursor-pointer`}
-      >
-        <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide border-b border-gray-100">
-          Categories
-        </div>
-        {categoriesLoading ? (
-          <div className="space-y-4">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="flex items-center space-x-2">
-                <Skeleton className="h-4 w-4" />
-                <Skeleton className="h-4 w-24" />
-              </div>
-            ))}
-          </div>
-        ) : (
-          [...categories]
-            .filter((c) => c !== "Others")
-            .concat("Others")
-            .map((category, index) => (
-              <button
-                key={index}
-                onClick={() => handleCategorySelect(category)}
-                className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150"
-              >
-                {category}
-              </button>
-            ))
-        )}
-      </div>
-    </div>
-  );
-}
 
 export default Navbar;
