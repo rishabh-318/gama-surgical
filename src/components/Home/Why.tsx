@@ -1,4 +1,4 @@
-import { CircleCheck, Clock, Globe, Microscope, Users } from "lucide-react";
+import { CircleCheck, Clock, Globe, Users } from "lucide-react";
 import React from "react";
 import BadgeIcon from "../CustomIcons/BadgeIcon";
 import CuboidIcon from "../CustomIcons/CuboidIcon";
@@ -48,11 +48,6 @@ const Why = () => {
             heading="ISO Certified"
             subHeading="ISO 9001:2015 & ISO 13485:2016 certified manufacturing facility"
             icon={<BadgeIcon textColor="#1679CA" />}
-          />
-          <WhyCard
-            heading="In-House Lab"
-            subHeading="Dedicated quality control laboratory for rigorous testing"
-            icon={<Microscope className="text-[#1679CA]" />}
           />
           <WhyCard
             heading="Quality Raw Materials"

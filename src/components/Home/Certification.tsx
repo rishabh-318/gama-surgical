@@ -95,8 +95,8 @@ const Certification = () => {
             <p className="text-[#52637A] text-sm sm:text-base mb-6 leading-relaxed">
               Our state-of-the-art manufacturing facility in Surat, Gujarat
               operates under strict quality control measures. Every product
-              undergoes rigorous testing in our in-house laboratory to ensure
-              compliance with international standards.
+              undergoes rigorous testing to ensure compliance with
+              international standards.
             </p>
 
             {/* Quality Features List */}
