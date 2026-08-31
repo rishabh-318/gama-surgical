@@ -1,6 +1,6 @@
 // AboutInfra.tsx - Improved and Responsive
 import { Card, CardContent } from "@/components/ui/card";
-import { Award, Building, Users } from "lucide-react";
+import { Building, Users } from "lucide-react";
 
 interface InfraCardProps {
   icon: React.ReactNode;
@@ -28,12 +28,6 @@ const infrastructure = [
       "Modern production unit in Surat with automated packaging lines",
   },
   {
-    icon: <Award className="w-6 h-6" />,
-    title: "Quality Control Labs",
-    description:
-      "In-house testing facilities for batch validation and quality assurance",
-  },
-  {
     icon: <Users className="w-6 h-6" />,
     title: "Expert Team",
     description: "Skilled professionals dedicated to manufacturing excellence",
@@ -52,7 +46,7 @@ const AboutInfra = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 py-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 py-8 max-w-3xl mx-auto">
         {infrastructure.map((item, index) => (
           <InfraCard key={index} {...item} />
         ))}
