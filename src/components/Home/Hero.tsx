@@ -120,7 +120,7 @@ const Hero = () => {
                 <StatItem number="50+" label="Products" />
                 <StatItem number="1000+" label="Clients" />
                 <StatItem number="5+" label="Years" />
-                <StatItem number="20+" label="Countries" />
+                <StatItem number="10+" label="States" />
               </div>
             </div>
 
@@ -177,28 +177,8 @@ const Hero = () => {
                 subtitle="European Conformity"
               />
 
-              <FeatureCard
-                icon={
-                  <svg
-                    width="49"
-                    height="48"
-                    viewBox="0 0 49 48"
-                    fill="none"
-                    className="w-8 h-8 sm:w-12 sm:h-12"
-                  >
-                    <path
-                      d="M40.7999 26C40.7999 36 33.7999 41 25.4799 43.9C25.0442 44.0477 24.5709 44.0406 24.1399 43.88C15.7999 41 8.79987 36 8.79987 26V12C8.79987 11.4696 9.01058 10.9609 9.38565 10.5858C9.76073 10.2107 10.2694 10 10.7999 10C14.7999 10 19.7999 7.60001 23.2799 4.56001C23.7036 4.19801 24.2426 3.99911 24.7999 3.99911C25.3572 3.99911 25.8962 4.19801 26.3199 4.56001C29.8199 7.62001 34.7999 10 38.7999 10C39.3303 10 39.839 10.2107 40.2141 10.5858C40.5892 10.9609 40.7999 11.4696 40.7999 12V26Z"
-                      stroke="white"
-                      strokeWidth="4"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                }
-                title="In-House Lab"
-                subtitle="Quality Control"
-              />
-
+              <div className="sm:col-span-2 flex justify-center">
+                <div className="w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(50%-0.75rem)]">
               <FeatureCard
                 icon={
                   <svg
@@ -234,6 +214,8 @@ const Hero = () => {
                 title="Export Ready"
                 subtitle="Global Standards"
               />
+                </div>
+              </div>
             </div>
           </div>
         </div>
