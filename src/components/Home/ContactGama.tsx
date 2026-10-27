@@ -119,7 +119,7 @@ const ContactGama = () => {
                     <input
                       type="tel"
                       name="phone"
-                      placeholder="+91 9978974208"
+                      placeholder="+91 9825882938"
                       value={formData.phone}
                       onChange={handleInputChange}
                       className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none text-sm sm:text-base"

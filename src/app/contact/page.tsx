@@ -45,7 +45,8 @@ function RightContact() {
             <Phone className="h-5 w-5 text-[#f97316] mt-1" />
           </div>
           <div>
-            <p className="font-medium text-foreground">Sales: +91 9978974208</p>
+            <p className="font-medium text-foreground">Sales: +91 9825882938</p>
+            <p className="font-medium text-foreground">+91 9537786752</p>
             <p className="text-sm text-muted-foreground">Mon-Sat, 9AM-6PM</p>
           </div>
         </div>
