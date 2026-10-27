@@ -181,7 +181,10 @@ const Footer = () => {
             </li>
             <li className="flex items-center justify-start gap-4 mb-2">
               <Phone className="text-[#FE5E0E] flex-shrink-0" />
-              <p>+91 9978974208</p>
+              <div>
+                <p>+91 9825882938</p>
+                <p>+91 9537786752</p>
+              </div>
             </li>
             <li className="flex  justify-start gap-4 mb-2 items-center">
               <Mail className="text-[#FE5E0E] flex-shrink-0 mt-1" />
